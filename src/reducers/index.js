@@ -1,5 +1,5 @@
 export const initialState = {
-
+  ar: "hello"
 };
 
 const reducer = (state = initialState, action) => {
