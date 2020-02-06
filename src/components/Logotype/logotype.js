@@ -1,14 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./logotype.sass";
-import personal from "./personal.jpg";
-import cart from "./cart.jpg";
+import personal from "../../img/personal.jpg";
+import cart from "../../img/cart.jpg";
 
 const Logotype = () => {
   const authBlock = <div className="logotype-content__auth">
-    <a href="#" className="logotype-content__logIn">Log In</a>
+    <Link to="#" className="logotype-content__logIn">
+      Log In
+    </Link>
     <span className="line"></span>
-    <a href="#" className="logotype-content__signIn">Sign In</a>
+    <Link to="/home/auth" className="logotype-content__signIn">
+      Sign In
+    </Link>
   </div>;
 
   const userBlock = <div className="logotype-content__user">
@@ -23,7 +28,7 @@ const Logotype = () => {
     <div className="logotype">
       <div className="container">
         <div className="logotype-content">
-          <div className="logotype-content__title">Logotype</div>
+          <Link to="/" className="logotype-content__title">Logotype</Link>
           <div className="logotype-content__wrapper">
             <a href="#" className="logotype-content__products">Products</a>
             { authBlock }
