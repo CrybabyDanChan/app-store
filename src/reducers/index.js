@@ -2,7 +2,8 @@ export const initialState = {
   login: "",
   password: "",
   loginError: null,
-  passwordError: null
+  passwordError: null,
+  authenticated: false
 };
 
 const reducer = (state = initialState, action) => {

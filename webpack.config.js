@@ -41,6 +41,7 @@ module.exports = (env = {}) => {
 
     output: {
       filename: isProd ? "main-[hash:8].js" : undefined,
+      path: path.resolve(__dirname, "public"),
       publicPath: "/"
     },
 
@@ -120,7 +121,7 @@ module.exports = (env = {}) => {
     plugins: getPlugins(),
 
     devServer: {
-      contentBase: path.join(__dirname, "dist/"),
+      contentBase: path.join(__dirname, "dist"),
       open: true,
       historyApiFallback: true
     }

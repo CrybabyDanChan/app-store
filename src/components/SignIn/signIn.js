@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import compose from "../../compose";
 
-import "./auth.sass";
+import "./signIn.sass";
 import validate from "../hoc/validate";
 
-const Auth = (props) => {
+const SignIn = (props) => {
   const {
     loginError,
     passwordError,
@@ -19,18 +19,18 @@ const Auth = (props) => {
 
   const generateInputClass = (errorTypes, key) => {
     return classNames({
-      "auth-form__input": key === "",
-      "auth-form__input auth-form__input_success": !errorTypes && key !== "",
-      "auth-form__input auth-form__input_error": errorTypes && key !== ""
+      "sign-in-form__input": key === "",
+      "sign-in-form__input sign-in-form__input_success": !errorTypes && key !== "",
+      "sign-in-form__input sign-in-form__input_error": errorTypes && key !== ""
     });
   };
 
   return (
-    <div className="auth">
-      <div className="auth-form">
-        <h1 className="auth-form__title">Sign In</h1>
-        <form className="auth-form__form" onSubmit={() => event.preventDefault()}>
-          <label className="auth-form__label">
+    <div className="sign-in">
+      <div className="sign-in-form">
+        <h1 className="sign-in-form__title">Sign In</h1>
+        <form className="sign-in-form__form" onSubmit={() => event.preventDefault()}>
+          <label className="sign-in-form__label">
             Login / Email address
             <input type="text"
               name="login"
@@ -39,7 +39,7 @@ const Auth = (props) => {
               value={login}
             ></input>
           </label>
-          <label className="auth-form__label auth-form__label_indent">
+          <label className="sign-in-form__label sign-in-form__label_indent">
             Password
             <input type="text"
               name="password"
@@ -48,14 +48,13 @@ const Auth = (props) => {
               value = {password}
             ></input>
           </label>
-          <button type="submit" className="auth-form__btn">sign in</button>
+          <button type="submit" className="sign-in-form__btn">sign in</button>
         </form>
       </div>
     </div>
   );
 };
-
-Auth.propTypes = {
+SignIn.propTypes = {
   loginError: PropTypes.any,
   passwordError: PropTypes.any,
   validateLogin: PropTypes.func,
@@ -71,4 +70,4 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps),
   validate
-)(Auth);
+)(SignIn);

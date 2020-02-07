@@ -2,7 +2,8 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import "./home.sass";
-import Auth from "../../Auth";
+import SignIn from "../../SignIn";
+import LogIn from "../../LogIn";
 
 const Home = () => {
   return (
@@ -10,9 +11,14 @@ const Home = () => {
       <div className="home__wrapper">
         <Switch>
           <Route
-            path="/home/auth"
+            path="/home/sign-in"
             exact
-            component = { Auth }
+            component = { SignIn }
+          />
+          <Route
+            path="/home/log-in"
+            exact
+            component = { LogIn }
           />
         </Switch>
       </div>

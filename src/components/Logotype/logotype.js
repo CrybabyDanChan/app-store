@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import "./logotype.sass";
 import personal from "../../img/personal.jpg";
@@ -7,13 +7,13 @@ import cart from "../../img/cart.jpg";
 
 const Logotype = () => {
   const authBlock = <div className="logotype-content__auth">
-    <Link to="#" className="logotype-content__logIn">
+    <NavLink to="/home/log-in" className="logotype-content__logIn" activeClassName="is-active">
       Log In
-    </Link>
+    </NavLink>
     <span className="line"></span>
-    <Link to="/home/auth" className="logotype-content__signIn">
+    <NavLink to="/home/sign-in" className="logotype-content__signIn" activeClassName="is-active">
       Sign In
-    </Link>
+    </NavLink>
   </div>;
 
   const userBlock = <div className="logotype-content__user">
