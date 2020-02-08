@@ -1,5 +1,5 @@
 export const initialState = {
-  authenticated: false
+  authenticated: true
 };
 
 const authenticated = (state = initialState, action) => {

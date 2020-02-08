@@ -34,7 +34,7 @@ const Logotype = ({ authenticated }) => {
         <div className="logotype-content">
           <Link to="/" className="logotype-content__title">Logotype</Link>
           <div className="logotype-content__wrapper">
-            <a href="#" className="logotype-content__products">Products</a>
+            <Link to="/products" className="logotype-content__products">Products</Link>
             { ViewBlock }
           </div>
         </div>

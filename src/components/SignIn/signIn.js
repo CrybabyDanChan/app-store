@@ -54,7 +54,7 @@ const SignIn = (props) => {
               value = {password}
             ></input>
           </label>
-          <button type="submit" className="btn">sign in</button>
+          <button type="submit" className="btn  btn_center">sign in</button>
         </form>
       </div>
     </div>

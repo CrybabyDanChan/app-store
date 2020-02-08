@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import "./app.sass";
 import Home from "../Page/Home";
 import Logotype from "../Logotype";
+import Products from "../Page/Products/products";
 
 function App () {
   return (
@@ -17,6 +18,11 @@ function App () {
             path="/home"
             render = { () => {
               return <Home/>;
+            }}/>
+          <Route
+            path="/products"
+            render = { () => {
+              return <Products/>;
             }}/>
           <Redirect from='/' to='/home'/>
         </Switch>

@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import "./home.sass";
 import SignIn from "../../SignIn";
 import LogIn from "../../LogIn";
+import WelcomeToUser from "../../WelcomeToUser/welcomeToUser";
 
 const Home = ({ authenticated }) => {
   const linksForNotAuth = <Switch>
@@ -21,10 +22,12 @@ const Home = ({ authenticated }) => {
     />
   </Switch>;
 
+  const viewBlock = authenticated ? <WelcomeToUser/> : linksForNotAuth;
+
   return (
     <div className="home">
       <div className="home__wrapper">
-        { linksForNotAuth }
+        { viewBlock }
       </div>
     </div>
   );
