@@ -1,7 +1,10 @@
 import React from "react";
+import { NavLink, Switch, Route } from "react-router-dom";
 
 import "./products.sass";
 import inc from "../../../images/inc.png";
+import WelcomeToUser from "../../WelcomeToUser";
+import Item from "../../Item";
 
 const Products = () => {
   return (
@@ -15,8 +18,33 @@ const Products = () => {
                 add product
             </button>
           </div>
+          <div className="products-wrapper__links">
+            <NavLink to="/products/all" className="products-wrapper__link"
+              activeClassName="is-active">
+                All Products
+            </NavLink>
+            <NavLink to="/products/my" className="products-wrapper__link products-wrapper__link_indent"
+              activeClassName="is-active">
+              My Products
+            </NavLink>
+          </div>
           <div className="products-wrapper__items">
-              
+            <Switch>
+              <Route
+                path="/products/all"
+                exact
+                render={() => {
+                  return <Item/>;
+                }}
+              />
+              <Route
+                path="/products/my"
+                exact
+                render={() => {
+                  return <WelcomeToUser/>;
+                }}
+              />
+            </Switch>
           </div>
         </div>
       </div>

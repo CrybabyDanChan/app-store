@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import "./logotype.sass";
-import personal from "../../img/personal.jpg";
-import cart from "../../img/cart.jpg";
+import personal from "../../images/personal.jpg";
+import cart from "../../images/cart.jpg";
 
 const Logotype = ({ authenticated }) => {
   const authBlock = <div className="logotype-content__auth">

@@ -16,5 +16,34 @@
         font-weight: bold
         font-size: 36px
         text-align: center
-        color: $black 
+        color: $black
+    &__links
+        margin-top: 35px
+    &__link
+        text-decoration: none
+        font-style: normal
+        font-weight: normal
+        font-size: 15px
+        color: $second-color
+        position: relative
+        &::before
+            content: ''
+            bottom: -4px
+            right: 0
+            position: absolute
+            width: 0%
+            height: 3px
+            background-color: $main-color
+            transition: 0.5s
+        &:hover
+            &::before
+                width: 100%
+                left: 0
+        &_indent
+            margin-left: 30px
+    .is-active
+        color: $black
+        border: none
+    &__items
+        margin-top: 20px
         
