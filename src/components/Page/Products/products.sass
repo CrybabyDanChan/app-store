@@ -35,14 +35,13 @@
             height: 3px
             background-color: $main-color
             transition: 0.5s
-        &:hover
-            &::before
-                width: 100%
-                left: 0
+        @include hover-link
         &_indent
             margin-left: 30px
     .is-active
         color: $black
-        border: none
+        &::before
+            width: 100%
+            left: 0
     &__items
         

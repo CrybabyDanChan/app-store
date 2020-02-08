@@ -19,6 +19,7 @@ const Products = ({ authenticated }) => {
       My Products
     </NavLink>
   </Fragment>;
+
   const authBlock = <Switch>
     <Route
       path="/products/all"
@@ -37,24 +38,29 @@ const Products = ({ authenticated }) => {
     <Redirect from="/products/" to="/products/all"/>
   </Switch>;
 
-  const viewBlock = authenticated ? authBlock : <AllProducts/>;
-  const viewLinks = authenticated ? authLinks : null;
+  const authButton = <button className="btn btn_img-flex">
+    <img src={inc} className="btn__img" alt=""/>
+    add product
+  </button>;
+
+  const viewAuthBlok = (trueBlock, falseBlock = null, provision = authenticated) => {
+    const viewBlock = provision ? trueBlock : falseBlock;
+    return viewBlock;
+  };
+
   return (
     <div className="products">
       <div className="container">
         <div className="products-wrapper">
           <div className="products-wrapper__bar">
             <div className="products-wrapper__title">Products</div>
-            <button className="btn btn_img-flex">
-              <img src={inc} className="btn__img" alt=""/>
-                add product
-            </button>
+            {viewAuthBlok(authButton)}
           </div>
           <div className="products-wrapper__links">
-            {viewLinks}
+            {viewAuthBlok(authLinks)}
           </div>
           <div className="products-wrapper__items">
-            {viewBlock}
+            {viewAuthBlok(authBlock, <AllProducts/>)}
           </div>
         </div>
       </div>
