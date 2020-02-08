@@ -4,8 +4,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import "./app.sass";
 import Home from "../Page/Home";
+import Products from "../Page/Products";
 import Logotype from "../Logotype";
-import Products from "../Page/Products/products";
 
 function App () {
   return (

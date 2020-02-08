@@ -1,12 +1,44 @@
-import React from "react";
-import { NavLink, Switch, Route } from "react-router-dom";
+import React, { Fragment } from "react";
+import { NavLink, Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import "./products.sass";
 import inc from "../../../images/inc.png";
-import WelcomeToUser from "../../WelcomeToUser";
-import Item from "../../Item";
+import MyProducts from "../../MyProducts";
+import AllProducts from "../../AllProducts";
 
-const Products = () => {
+const Products = ({ authenticated }) => {
+  const authLinks = <Fragment>
+    <NavLink to="/products/all" className="products-wrapper__link"
+      activeClassName="is-active">
+        All Products
+    </NavLink>
+    <NavLink to="/products/my" className="products-wrapper__link products-wrapper__link_indent"
+      activeClassName="is-active">
+      My Products
+    </NavLink>
+  </Fragment>;
+  const authBlock = <Switch>
+    <Route
+      path="/products/all"
+      exact
+      render={() => {
+        return <AllProducts/>;
+      }}
+    />
+    <Route
+      path="/products/my"
+      exact
+      render={() => {
+        return <MyProducts/>;
+      }}
+    />
+    <Redirect from="/products/" to="/products/all"/>
+  </Switch>;
+
+  const viewBlock = authenticated ? authBlock : <AllProducts/>;
+  const viewLinks = authenticated ? authLinks : null;
   return (
     <div className="products">
       <div className="container">
@@ -19,32 +51,10 @@ const Products = () => {
             </button>
           </div>
           <div className="products-wrapper__links">
-            <NavLink to="/products/all" className="products-wrapper__link"
-              activeClassName="is-active">
-                All Products
-            </NavLink>
-            <NavLink to="/products/my" className="products-wrapper__link products-wrapper__link_indent"
-              activeClassName="is-active">
-              My Products
-            </NavLink>
+            {viewLinks}
           </div>
           <div className="products-wrapper__items">
-            <Switch>
-              <Route
-                path="/products/all"
-                exact
-                render={() => {
-                  return <Item/>;
-                }}
-              />
-              <Route
-                path="/products/my"
-                exact
-                render={() => {
-                  return <WelcomeToUser/>;
-                }}
-              />
-            </Switch>
+            {viewBlock}
           </div>
         </div>
       </div>
@@ -52,4 +62,12 @@ const Products = () => {
   );
 };
 
-export default Products;
+const mapStateToProps = (state) => {
+  return state.authenticated;
+};
+
+Products.propTypes = {
+  authenticated: PropTypes.bool
+};
+
+export default connect(mapStateToProps, undefined, undefined, { pure: false })(Products);

@@ -1,17 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import "./item.sass";
 import whiteCart from "../../images/whiteCart.png";
 
-const Item = () => {
+const Item = (props) => {
+  const { name, avatar, description } = props;
   return (
     <div className="item">
       <div className="container">
         <div className="item-wrapper">
-          <img src="https://vernik.me/wp-content/uploads/2019/09/uemrerminor.jpg" alt="" className="item-wrapper__img"/>
+          <img src={avatar} alt="" className="item-wrapper__img"/>
           <div className="item-wrapper__description">
-            <div className="item-wrapper__title">Apple Watch Series 3</div>
-            <div className="item-wrapper__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id justo velit. Ut tincidunt rhoncus eros, eget tincidunt orci consequat nec ...</div>
+            <div className="item-wrapper__title">{name}</div>
+            <div className="item-wrapper__text">{description}</div>
           </div>
           <div className="item-wrapper__counter">
             <button className="item-wrapper__dec">
@@ -31,6 +33,12 @@ const Item = () => {
       </div>
     </div>
   );
+};
+
+Item.propTypes = {
+  name: PropTypes.string,
+  avatar: PropTypes.string,
+  description: PropTypes.string
 };
 
 export default Item;
