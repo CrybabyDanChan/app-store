@@ -1,3 +1,7 @@
+@import "../../styles/mixin"
+@import "../../styles/variables"
+@import "../../styles/blocks/btn"
+
 .log-in-form
     position: absolute
     top: 50%
@@ -14,7 +18,7 @@
         font-weight: bold
         font-size: 36px
         text-align: center
-        color: #32394B
+        color: $black
     &__form
         margin: 60px
         margin-top: 30px
@@ -25,7 +29,7 @@
         font-weight: bold
         font-size: 14px
         letter-spacing: 0.02em
-        color: #7E8AA8
+        color: $second-color
         &_indent
             margin-top: 30px
     &__input
@@ -40,27 +44,11 @@
         font-style: normal
         font-weight: normal
         font-size: 14px
-        color: #7E8AA8
+        color: $second-color
         &_error
+            @include input-error
             background: url("../../img/error.png") no-repeat 371px
-            border: 1px solid #F2544A
         &_success
+            @include input-success
             background: url("../../img/success.png") no-repeat 371px
-            border: 1px solid #65BA57
-    &__btn
-        margin: 0 auto
-        margin-top: 30px
-        width: 160px
-        height: 44px
-        background: #5E98FF
-        border-radius: 2px
-        font-style: normal
-        font-weight: bold
-        font-size: 13px
-        letter-spacing: 0.02em
-        text-transform: uppercase
-        color: #FFFFFF
-        border: none
-        cursor: pointer
-        &:active
-            color: #FFFFFF
+    

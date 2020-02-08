@@ -1,3 +1,5 @@
+@import "../../styles/_mixin"
+
 .logotype-content
     height: 80px
     background: #FFFFFF
@@ -30,6 +32,7 @@
         letter-spacing: 0.02em
         text-transform: uppercase
         color: #7E8AA8
+        @include hover-link
     &__auth
         margin-left: 50px
         display: flex
@@ -43,6 +46,7 @@
         letter-spacing: 0.02em
         color: #7E8AA8
         margin-right: 20px
+        @include hover-link
     .line
         border: 1px solid #DEE3F0
         height: 28px
@@ -54,6 +58,7 @@
         letter-spacing: 0.02em
         color: #7E8AA8
         margin-left: 20px
+        @include hover-link
     &__user
         width: 70px
         display: flex

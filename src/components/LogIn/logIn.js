@@ -6,15 +6,20 @@ import classNames from "classnames";
 import compose from "../../compose";
 import "./logIn.sass";
 import validate from "../hoc/validate";
+import * as Actions from "../../actions/logIn";
 
 const LogIn = (props) => {
   const {
-    loginError,
-    passwordError,
+    regLoginError,
+    regPasswordError,
     validateLogin,
     validatePassword,
-    password,
-    login
+    regPassword,
+    regLogin,
+    setRegLoginValue,
+    setRegPasswordValue,
+    setRegPasswordError,
+    setRegLoginError
   } = props;
 
   const generateInputClass = (errorTypes, key) => {
@@ -34,40 +39,44 @@ const LogIn = (props) => {
             Login / Email address
             <input type="text"
               name="login"
-              className={generateInputClass(loginError, login)}
-              onChange={validateLogin}
-              value={login}
+              className={generateInputClass(regLoginError, regLogin)}
+              onChange={() => validateLogin(event, setRegLoginValue, setRegLoginError)}
+              value={regLogin}
             ></input>
           </label>
           <label className="log-in-form__label log-in-form__label_indent">
             Password
             <input type="text"
               name="password"
-              className={generateInputClass(passwordError, password)}
-              onChange={validatePassword}
-              value = {password}
+              className={generateInputClass(regPasswordError, regPassword)}
+              onChange={() => validatePassword(event, setRegPasswordValue, setRegPasswordError)}
+              value = {regPassword}
             ></input>
           </label>
-          <button type="submit" className="log-in-form__btn">log in</button>
+          <button type="submit" className="btn">log in</button>
         </form>
       </div>
     </div>
   );
 };
 LogIn.propTypes = {
-  loginError: PropTypes.any,
-  passwordError: PropTypes.any,
+  regLoginError: PropTypes.any,
+  regPasswordError: PropTypes.any,
   validateLogin: PropTypes.func,
   validatePassword: PropTypes.func,
-  password: PropTypes.string,
-  login: PropTypes.string
+  regPassword: PropTypes.string,
+  regLogin: PropTypes.string,
+  setRegLoginValue: PropTypes.func,
+  setRegPasswordValue: PropTypes.func,
+  setRegPasswordError: PropTypes.func,
+  setRegLoginError: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
-  return state;
+  return state.logIn;
 };
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, Actions),
   validate
 )(LogIn);

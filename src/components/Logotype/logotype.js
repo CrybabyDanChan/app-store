@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import "./logotype.sass";
 import personal from "../../img/personal.jpg";
 import cart from "../../img/cart.jpg";
 
-const Logotype = () => {
+const Logotype = ({ authenticated }) => {
   const authBlock = <div className="logotype-content__auth">
     <NavLink to="/home/log-in" className="logotype-content__logIn" activeClassName="is-active">
       Log In
@@ -24,6 +26,8 @@ const Logotype = () => {
       <img src={cart} alt="cart"></img>
     </a>
   </div>;
+
+  const ViewBlock = authenticated ? userBlock : authBlock;
   return (
     <div className="logotype">
       <div className="container">
@@ -31,7 +35,7 @@ const Logotype = () => {
           <Link to="/" className="logotype-content__title">Logotype</Link>
           <div className="logotype-content__wrapper">
             <a href="#" className="logotype-content__products">Products</a>
-            { authBlock }
+            { ViewBlock }
           </div>
         </div>
       </div>
@@ -39,4 +43,12 @@ const Logotype = () => {
   );
 };
 
-export default Logotype;
+const mapStateToProps = (state) => {
+  return state.authenticated;
+};
+
+Logotype.propTypes = {
+  authenticated: PropTypes.bool
+};
+
+export default connect(mapStateToProps, undefined, undefined, { pure: false })(Logotype);

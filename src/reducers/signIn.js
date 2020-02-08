@@ -2,11 +2,10 @@ export const initialState = {
   login: "",
   password: "",
   loginError: null,
-  passwordError: null,
-  authenticated: false
+  passwordError: null
 };
 
-const reducer = (state = initialState, action) => {
+const signIn = (state = initialState, action) => {
   switch (action.type) {
     case "SET_LOGIN":
       return {
@@ -36,4 +35,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default signIn;

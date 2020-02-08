@@ -6,6 +6,7 @@ import compose from "../../compose";
 
 import "./signIn.sass";
 import validate from "../hoc/validate";
+import * as Actions from "../../actions/signIn";
 
 const SignIn = (props) => {
   const {
@@ -14,9 +15,14 @@ const SignIn = (props) => {
     validateLogin,
     validatePassword,
     password,
-    login
+    login,
+    setLoginValue,
+    setPasswordValue,
+    setPasswordError,
+    setLoginError
   } = props;
 
+  console.log(props);
   const generateInputClass = (errorTypes, key) => {
     return classNames({
       "sign-in-form__input": key === "",
@@ -35,7 +41,7 @@ const SignIn = (props) => {
             <input type="text"
               name="login"
               className={generateInputClass(loginError, login)}
-              onChange={validateLogin}
+              onChange={() => validateLogin(event, setLoginValue, setLoginError)}
               value={login}
             ></input>
           </label>
@@ -44,11 +50,11 @@ const SignIn = (props) => {
             <input type="text"
               name="password"
               className={generateInputClass(passwordError, password)}
-              onChange={validatePassword}
+              onChange={() => validatePassword(event, setPasswordValue, setPasswordError)}
               value = {password}
             ></input>
           </label>
-          <button type="submit" className="sign-in-form__btn">sign in</button>
+          <button type="submit" className="btn">sign in</button>
         </form>
       </div>
     </div>
@@ -60,14 +66,18 @@ SignIn.propTypes = {
   validateLogin: PropTypes.func,
   validatePassword: PropTypes.func,
   password: PropTypes.string,
-  login: PropTypes.string
+  login: PropTypes.string,
+  setLoginValue: PropTypes.func,
+  setPasswordValue: PropTypes.func,
+  setPasswordError: PropTypes.func,
+  setLoginError: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
-  return state;
+  return state.signIn;
 };
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, Actions),
   validate
 )(SignIn);

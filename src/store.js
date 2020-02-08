@@ -1,6 +1,14 @@
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 
-import reducer from "./reducers/index";
+import signIn from "./reducers/signIn";
+import logIn from "./reducers/logIn";
+import authenticated from "./reducers/authenticated";
+
+const reducer = combineReducers({
+  signIn,
+  logIn,
+  authenticated
+});
 
 const store = createStore(reducer);
 
