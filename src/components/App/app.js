@@ -6,6 +6,8 @@ import "./app.sass";
 import Home from "../Page/Home";
 import Products from "../Page/Products";
 import Logotype from "../Logotype";
+import Cart from "../Cart/cart";
+import CreateProducts from "../../CreateProduts/createProducts";
 
 function App () {
   return (
@@ -23,6 +25,17 @@ function App () {
             path="/products"
             render = { () => {
               return <Products/>;
+            }}/>
+          <Route
+            path="/cart"
+            render = { () => {
+              return <Cart/>;
+            }}/>
+          <Route
+            path="/create-products"
+            exact
+            render={() => {
+              return <CreateProducts/>;
             }}/>
           <Redirect from='/' to='/home'/>
         </Switch>

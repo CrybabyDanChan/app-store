@@ -64,6 +64,19 @@
         display: flex
         justify-content: space-between
         align-items: center
+    &__personal
+        img
+            display: block
+            position: relative
+            &::before
+                content: "1"
+                position: absolute
+                width: 10px
+                height: 10px
+                top: 0
+                left: 0
+                color: red
+                z-index: 2
 
 .is-active
     color: #32394B

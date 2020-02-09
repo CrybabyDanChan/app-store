@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { NavLink, Switch, Route, Redirect } from "react-router-dom";
+import { NavLink, Switch, Route, Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -38,10 +38,12 @@ const Products = ({ authenticated }) => {
     <Redirect from="/products/" to="/products/all"/>
   </Switch>;
 
-  const authButton = <button className="btn btn_img-flex">
-    <img src={inc} className="btn__img" alt=""/>
-    add product
-  </button>;
+  const authButton = <Link to="/create-products" className="products-wrapper__link">
+    <button className="btn btn_img-flex">
+      <img src={inc} className="btn__img" alt=""/>
+      add product
+    </button>
+  </Link>;
 
   const viewAuthBlok = (trueBlock, falseBlock = null, provision = authenticated) => {
     const viewBlock = provision ? trueBlock : falseBlock;

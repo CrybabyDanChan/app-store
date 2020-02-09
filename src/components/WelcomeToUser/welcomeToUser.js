@@ -11,7 +11,9 @@ const WelcomeToUser = () => {
         <Link to="/products" className="btn__link">
           <button className="btn">products</button>
         </Link>
-        <button className="btn btn_left">cart</button>
+        <Link to="/cart" className="btn__link">
+          <button className="btn btn_left">cart</button>
+        </Link>
       </div>
     </div>
   );

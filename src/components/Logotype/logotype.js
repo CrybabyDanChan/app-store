@@ -19,12 +19,12 @@ const Logotype = ({ authenticated }) => {
   </div>;
 
   const userBlock = <div className="logotype-content__user">
-    <a href="#" className="logotype-content__personal">
+    <Link to="#" className="logotype-content__personal">
       <img src={personal} alt="personal"/>
-    </a>
-    <a href="#" className="logotype-content__cart">
+    </Link>
+    <Link to="/cart" className="logotype-content__cart">
       <img src={cart} alt="cart"></img>
-    </a>
+    </Link>
   </div>;
 
   const ViewBlock = authenticated ? userBlock : authBlock;
