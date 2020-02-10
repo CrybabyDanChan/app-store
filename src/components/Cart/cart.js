@@ -5,13 +5,12 @@ import PropTypes from "prop-types";
 import "./cart.sass";
 import Item from "../Item";
 import * as Actions from "../../actions/products";
+import Button from "../Button";
 
 const Cart = ({ arrayOfCart, clearCart }) => {
   const placeOrder = arrayOfCart.length ? <div className="cart-wrapper__place-order">
-    <button className="btn btn_cancel"
-      onClick={() => clearCart()}
-    >clear</button>
-    <button className="btn">order</button>
+    <Button events text={"clear"} actionMethod = {clearCart} additionalClass={"btn_cancel"}/>
+    <Button text={"order"}/>
   </div> : null;
 
   return (

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import "./welcomeToUser.sass";
+import Button from "../Button";
 
 const WelcomeToUser = () => {
   return (
@@ -9,10 +10,10 @@ const WelcomeToUser = () => {
       <div className="welcome-to-user__title">Hello, Robert!</div>
       <div className="welcome-to-user__wrapper">
         <Link to="/products" className="btn__link">
-          <button className="btn">products</button>
+          <Button text = {"products"}/>
         </Link>
         <Link to="/cart" className="btn__link">
-          <button className="btn btn_left">cart</button>
+          <Button text = {"cart"} additionalClass ={"btn_left"}/>
         </Link>
       </div>
     </div>

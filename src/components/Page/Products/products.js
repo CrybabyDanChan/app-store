@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import "./products.sass";
-import inc from "../../../images/inc.png";
 import MyProducts from "../../MyProducts";
 import AllProducts from "../../AllProducts";
+import Button from "../../Button";
 
 const Products = ({ authenticated }) => {
   const authLinks = <Fragment>
@@ -39,10 +39,7 @@ const Products = ({ authenticated }) => {
   </Switch>;
 
   const authButton = <Link to="/create-products" className="products-wrapper__link">
-    <button className="btn btn_img-flex">
-      <img src={inc} className="btn__img" alt=""/>
-      add product
-    </button>
+    <Button addProduct/>
   </Link>;
 
   const viewAuthBlok = (trueBlock, falseBlock = null, provision = authenticated) => {
