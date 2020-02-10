@@ -1,5 +1,5 @@
-@import "../styles/mixin"
-@import "../styles/variables"
+@import "../../styles/mixin"
+@import "../../styles/variables"
     
 .create-products
     background: #F0F4FE
@@ -30,7 +30,6 @@
         font-size: 14px
         letter-spacing: 0.02em
         color: $second-color
-        &_
     &__textarea-description
         margin-top: 12px
         width: 726px
@@ -48,3 +47,40 @@
         border: 1px solid #5E98FF
         box-sizing: border-box
         border-radius: 2px
+    &__img-input
+        position: relative
+        border: 10px solid #F0F4FE 
+        width: 373px
+        height: 373px
+        &::before
+            content: ""
+            display: block
+            position: absolute
+            top: 0
+            left: 0
+            border: 1px dashed #DEE3F0
+            width: 372px
+            height: 372px
+            z-index: -2
+    &__form-label-file
+        width: 100%
+        height: 100%
+        display: flex
+        flex-direction: column
+        font-style: normal
+        font-weight: bold
+        font-size: 14px
+        letter-spacing: 0.02em
+        color: $second-color
+    &__form-img
+        width: 100%
+        height: 100%
+        display: block
+        margin: 0 auto
+        margin-top: 120px
+        object-fit: cover
+    &__input-file
+        opacity: 0
+        visibility: hidden
+        position: absolute
+

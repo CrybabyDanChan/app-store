@@ -37,7 +37,8 @@ const mapStateToProps = (state) => {
 };
 
 Cart.propTypes = {
-  arrayOfCart: PropTypes.arrayOf(PropTypes.object)
+  arrayOfCart: PropTypes.arrayOf(PropTypes.object),
+  clearCart: PropTypes.func
 };
 
 export default connect(mapStateToProps, Actions)(Cart);
