@@ -13,6 +13,12 @@
         line-height: 44px
         color: $black
         padding-top: 50px
+    &__subtitle
+        font-style: normal
+        font-weight: bold
+        font-size: 14px
+        letter-spacing: 0.02em
+        color: $second-color
     &__items
         padding-top: 50px 
         margin-top: 30px
@@ -20,17 +26,46 @@
         background: #FFFFFF
     &__form
         display: flex
+        justify-content: space-between
+        margin: 0 50px
+    &__input-wrapper
+        height: 373px
+        display: flex
         flex-direction: column
+        justify-content: flex-start
+    &__counter-wrapper
+        margin-top: 26px
+        display: flex
         align-items: center
+        justify-content: flex-start
+    &__btn-wrapper
+        margin-top: 50px
+        width: 340px
+        display: flex
+        justify-content: space-between
     &__form-label
         display: flex
         flex-direction: column
-        font-style: norma
-        font-weight: bold
+        font-style: normal
+        font-weight: normal
         font-size: 14px
-        letter-spacing: 0.02em
-        color: $second-color
-    &__textarea-description
+        line-height: 160%
+    &_indent-top
+        margin-top: 30px
+    &_indent-right
+        margin-right: 30px
+    &__input
+        padding-left: 20px
+        margin-top: 12px
+        width: 726px
+        height: 44px
+        background: #FFFFFF
+        border: 1px solid #5E98FF
+        box-sizing: border-box
+        border-radius: 2px
+    &__textarea
+        padding-left: 20px
+        padding-top: 2px
         margin-top: 12px
         width: 726px
         height: 88px
@@ -39,48 +74,10 @@
         box-sizing: border-box
         border-radius: 2px
         resize: none
-    &__input
-        margin-top: 12px
-        width: 726px
-        height: 44px
-        background: #FFFFFF
-        border: 1px solid #5E98FF
-        box-sizing: border-box
-        border-radius: 2px
     &__img-input
+        margin-top: 12px
         position: relative
         border: 10px solid #F0F4FE 
         width: 373px
         height: 373px
-        &::before
-            content: ""
-            display: block
-            position: absolute
-            top: 0
-            left: 0
-            border: 1px dashed #DEE3F0
-            width: 372px
-            height: 372px
-            z-index: -2
-    &__form-label-file
-        width: 100%
-        height: 100%
-        display: flex
-        flex-direction: column
-        font-style: normal
-        font-weight: bold
-        font-size: 14px
-        letter-spacing: 0.02em
-        color: $second-color
-    &__form-img
-        width: 100%
-        height: 100%
-        display: block
-        margin: 0 auto
-        margin-top: 120px
-        object-fit: cover
-    &__input-file
-        opacity: 0
-        visibility: hidden
-        position: absolute
-
+   

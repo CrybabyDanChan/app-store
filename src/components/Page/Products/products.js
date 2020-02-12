@@ -35,7 +35,7 @@ const Products = ({ authenticated }) => {
         return <MyProducts/>;
       }}
     />
-    <Redirect from="/products/" to="/products/all"/>
+    <Redirect exact from="/products/" to="/products/all"/>
   </Switch>;
 
   const authButton = <Link to="/create-products" className="products-wrapper__link">

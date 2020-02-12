@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 
 import "./button.sass";
 
@@ -16,19 +17,19 @@ const Button = (props) => {
     deleting,
     id,
     actionMethod,
-    additionalClass,
-    events
+    additionalClass
   } = props;
+
+  const handleBtn = (event) => {
+    event.preventDefault();
+  };
+
+  const genearetEvent = !actionMethod ? handleBtn : actionMethod;
 
   const generateClass = `btn + ${additionalClass}`;
 
   const defaultButton = <button
-    className={generateClass}>
-    {text}
-  </button>;
-
-  const eventsButton = <button
-    onClick={() => actionMethod()}
+    onClick={genearetEvent}
     className={generateClass}>
     {text}
   </button>;
@@ -60,8 +61,7 @@ const Button = (props) => {
       : (addProduct) ? addProductButton
         : (deleting) ? deleteButton
           : (editProduct) ? editProductButton
-            : (events) ? eventsButton
-              : defaultButton;
+            : defaultButton;
     return button;
   };
   return (
@@ -76,7 +76,18 @@ Button.deffaultProps = {
   deleting: false,
   addProduct: false,
   additionalClass: null,
-  value: null
+  value: null,
+  actionMethod: false
 };
 
+Button.propTypes = {
+  text: PropTypes.string,
+  addProductsToCart: PropTypes.bool,
+  editProduct: PropTypes.bool,
+  addProduct: PropTypes.bool,
+  deleting: PropTypes.bool,
+  id: PropTypes.any,
+  actionMethod: PropTypes.func,
+  additionalClass: PropTypes.string
+};
 export default Button;
