@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { connect } from "react-redux";
 
 import "./item.sass";
 import * as Actions from "../../actions/products";
 import Button from "../Button";
+import Counter from "../Counter";
 
 const Item = (props) => {
   const {
@@ -31,14 +31,7 @@ const Item = (props) => {
             <div className="item-wrapper__text">{description}</div>
           </div>
           <div className="item-wrapper__counter">
-            <button className="item-wrapper__dec">
-              <span></span>
-            </button>
-            <div className="item-wrapper__result">{count}</div>
-            <button className="item-wrapper__inc">
-              <span></span>
-              <span></span>
-            </button>
+            <Counter/>
           </div>
           {generateBtn}
         </div>
