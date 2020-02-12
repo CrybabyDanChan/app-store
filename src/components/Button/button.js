@@ -21,7 +21,7 @@ const Button = (props) => {
   } = props;
 
   const handleBtn = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
   };
 
   const genearetEvent = !actionMethod ? handleBtn : actionMethod;

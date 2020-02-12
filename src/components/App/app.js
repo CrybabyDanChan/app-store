@@ -29,7 +29,6 @@ function App () {
             }}/>
           <Route
             path="/cart"
-            exact
             render = { () => {
               return <Cart/>;
             }}/>
@@ -39,7 +38,7 @@ function App () {
             render={() => {
               return <CreateProducts/>;
             }}/>
-          <Redirect exact from='/' to='/home'/>
+          <Redirect from='/' to='/home'/>
         </Switch>
       </div>
     </Fragment>
