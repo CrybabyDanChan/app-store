@@ -1,4 +1,7 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import createSagaMiddleware from "redux-saga";
+import { watchLoadLogInData } from "./sagas/logInSaga";
+import { watchLoadSignInData } from "./sagas/sigInSaga";
 
 import signIn from "./reducers/signIn";
 import logIn from "./reducers/logIn";
@@ -12,6 +15,10 @@ const reducer = combineReducers({
   products
 });
 
-const store = createStore(reducer);
+const logInSagaMiddelware = createSagaMiddleware();
+const signInSagaMiddelware = createSagaMiddleware();
 
+const store = createStore(reducer, applyMiddleware(logInSagaMiddelware, signInSagaMiddelware));
+logInSagaMiddelware.run(watchLoadLogInData);
+signInSagaMiddelware.run(watchLoadSignInData);
 export default store;

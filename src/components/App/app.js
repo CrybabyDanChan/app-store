@@ -18,7 +18,6 @@ function App () {
         <Switch>
           <Route
             path="/home"
-            exact
             render = { () => {
               return <Home/>;
             }}/>
@@ -34,11 +33,10 @@ function App () {
             }}/>
           <Route
             path="/create-products"
-            exact
             render={() => {
               return <CreateProducts/>;
             }}/>
-          <Redirect from='/' to='/home'/>
+          <Redirect from='/' to='/home/log-in'/>
         </Switch>
       </div>
     </Fragment>

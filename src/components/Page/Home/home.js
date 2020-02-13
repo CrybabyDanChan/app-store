@@ -12,13 +12,16 @@ const Home = ({ authenticated }) => {
   const linksForNotAuth = <Switch>
     <Route
       path="/home/sign-in"
-      exact
-      component = { SignIn }
+      render={() => {
+        return <SignIn/>;
+      }}
     />
     <Route
-      path="/home/log-in"
       exact
-      component = { LogIn }
+      path="/home/log-in"
+      render={() => {
+        return <LogIn />;
+      }}
     />
   </Switch>;
 

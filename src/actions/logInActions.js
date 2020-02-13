@@ -12,16 +12,9 @@ const setPasswordValue = (value) => {
   };
 };
 
-const setPasswordError = (value) => {
+const userLogIn = (value) => {
   return {
-    type: "SET_PASSWORD_ERRROR",
-    payload: value
-  };
-};
-
-const setLoginError = (value) => {
-  return {
-    type: "SET_LOGIN_ERROR",
+    type: "LOAD_USER_LOG_IN",
     payload: value
   };
 };
@@ -29,6 +22,5 @@ const setLoginError = (value) => {
 export {
   setLoginValue,
   setPasswordValue,
-  setPasswordError,
-  setLoginError
+  userLogIn
 };

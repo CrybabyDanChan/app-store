@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import "./item.sass";
-import * as Actions from "../../actions/products";
+import * as productsActions from "../../actions/productsActions";
 import Button from "../Button";
 import Counter from "../Counter";
 
@@ -50,4 +50,4 @@ Item.propTypes = {
   addToCart: PropTypes.func
 };
 
-export default connect(undefined, Actions)(Item);
+export default connect(undefined, productsActions)(Item);

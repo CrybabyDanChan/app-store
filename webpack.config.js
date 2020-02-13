@@ -123,7 +123,8 @@ module.exports = (env = {}) => {
     devServer: {
       contentBase: path.join(__dirname, "dist"),
       open: true,
-      historyApiFallback: true
+      historyApiFallback: true,
+      port: 8082
     }
   };
 };

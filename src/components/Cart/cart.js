@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import "./cart.sass";
 import Item from "../Item";
-import * as Actions from "../../actions/products";
+import * as productsActions from "../../actions/productsActions";
 import Button from "../Button";
 
 const Cart = ({ arrayOfCart, clearCart }) => {
@@ -41,4 +41,4 @@ Cart.propTypes = {
   clearCart: PropTypes.func
 };
 
-export default connect(mapStateToProps, Actions)(Cart);
+export default connect(mapStateToProps, productsActions)(Cart);
