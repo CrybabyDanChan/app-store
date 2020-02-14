@@ -7,6 +7,7 @@ import compose from "../../compose";
 import "./signIn.sass";
 import validate from "../hoc/validate";
 import * as signInActions from "../../actions/signInActions";
+import Button from "../Button";
 
 const SignIn = (props) => {
   const {
@@ -32,9 +33,19 @@ const SignIn = (props) => {
     });
   };
 
+  const generateBtn = !(!passwordError && !loginError && loginValue !== "" && passwordValue !== "");
+
+  console.log(generateBtn, loginError, passwordError);
+
   const registerUser = (event) => {
     event.preventDefault();
     regUser();
+    setFormValue({
+      loginValue: "",
+      passwordValue: "",
+      loginError: false,
+      passwordError: false
+    });
   };
 
   const handleChangeLogin = (event) => {
@@ -90,7 +101,7 @@ const SignIn = (props) => {
               value = {passwordValue}
             ></input>
           </label>
-          <button type="submit" className="btn  btn_center">sign in</button>
+          <Button text={"sign in"} additionalClass={"btn_center"} disabled={generateBtn}/>
         </form>
       </div>
     </div>

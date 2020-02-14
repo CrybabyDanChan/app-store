@@ -7,6 +7,7 @@ import compose from "../../compose";
 import "./logIn.sass";
 import validate from "../hoc/validate";
 import * as actionsLogIn from "../../actions/logInActions";
+import Button from "../Button";
 
 const LogIn = (props) => {
   const {
@@ -91,7 +92,7 @@ const LogIn = (props) => {
               value = {passwordValue}
             ></input>
           </label>
-          <button type="submit" className="btn btn_center">log in</button>
+          <Button text={"log in"} additionalClass={"btn_center"}/>
         </form>
       </div>
     </div>

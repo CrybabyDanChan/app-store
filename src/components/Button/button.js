@@ -17,11 +17,12 @@ const Button = (props) => {
     deleting,
     id,
     actionMethod,
-    additionalClass
+    additionalClass,
+    disabled
   } = props;
 
   const handleBtn = (event) => {
-    // event.preventDefault();
+
   };
 
   const genearetEvent = !actionMethod ? handleBtn : actionMethod;
@@ -56,12 +57,19 @@ const Button = (props) => {
     edit product
   </button>;
 
+  const disabledButton = <button
+    disabled
+    className="btn__disabled btn_center">
+    {text}
+  </button>;
+
   const generateButton = () => {
     const button = (addProductsToCart) ? addToCart
       : (addProduct) ? addProductButton
         : (deleting) ? deleteButton
           : (editProduct) ? editProductButton
-            : defaultButton;
+            : (disabled) ? disabledButton
+              : defaultButton;
     return button;
   };
   return (
@@ -77,7 +85,8 @@ Button.deffaultProps = {
   addProduct: false,
   additionalClass: null,
   value: null,
-  actionMethod: false
+  actionMethod: false,
+  disabled: false
 };
 
 Button.propTypes = {
@@ -88,6 +97,7 @@ Button.propTypes = {
   deleting: PropTypes.bool,
   id: PropTypes.any,
   actionMethod: PropTypes.func,
-  additionalClass: PropTypes.string
+  additionalClass: PropTypes.string,
+  disabled: PropTypes.bool
 };
 export default Button;
