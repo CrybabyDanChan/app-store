@@ -1,6 +1,6 @@
 export const initialState = {
   userName: "",
-  authenticated: false,
+  auth: false,
   error: false
 };
 
@@ -10,27 +10,27 @@ const authenticated = (state = initialState, action) => {
       return {
         ...state,
         userName: action.payload,
-        authenticated: true
+        auth: true
       };
 
     case "SET_ERROR":
       return {
         ...state,
-        authenticated: false,
+        auth: false,
         error: action.payload
       };
 
     case "LOAD_AUTH":
       return {
         ...state,
-        authenticated: true
+        auth: true
       };
 
     case "OUT_LOGIN":
       return {
         ...state,
         userName: "",
-        authenticated: false,
+        auth: false,
         error: false
       };
 

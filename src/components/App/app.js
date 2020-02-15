@@ -12,11 +12,9 @@ import CreateProducts from "../createProduts";
 import * as authenticatedActions from "../../actions/authenticatedActions";
 
 function App (props) {
-  const { logAuth, authenticated } = props;
+  const { logAuth } = props;
   useEffect(() => {
-    if(localStorage.token) {
-      logAuth();
-    }
+    logAuth();
   }, []);
   return (
     <Fragment>

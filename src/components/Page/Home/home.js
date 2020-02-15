@@ -10,7 +10,6 @@ import WelcomeToUser from "../../WelcomeToUser/welcomeToUser";
 import OutUser from "../../outUser";
 
 const Home = ({ authenticated }) => {
-  console.log(authenticated);
   return (
     <div className="home">
       <div className="home__wrapper">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -17,8 +17,15 @@ const LogIn = (props) => {
     setLoginValue,
     setPasswordValue,
     userLogIn,
+    auth,
     history
   } = props;
+
+  useEffect(() => {
+    if (auth) {
+      history.push("/home/welcome");
+    }
+  });
 
   const [{ loginValue, passwordValue, loginError, passwordError }, setFormValue] = useState({
     loginValue: "",
@@ -38,7 +45,6 @@ const LogIn = (props) => {
   const enterUser = (event) => {
     event.preventDefault();
     userLogIn();
-    history.push("/home/welcome");
   };
 
   const handleChangeLogin = (event) => {
@@ -105,11 +111,13 @@ LogIn.propTypes = {
   validatePassword: PropTypes.func,
   setLoginValue: PropTypes.func,
   setPasswordValue: PropTypes.func,
-  userLogIn: PropTypes.func
+  userLogIn: PropTypes.func,
+  auth: PropTypes.bool,
+  history: PropTypes.any
 };
 
 const mapStateToProps = (state) => {
-  return state.logIn;
+  return state.authenticated;
 };
 
 export default compose(

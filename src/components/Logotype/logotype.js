@@ -7,7 +7,7 @@ import "./logotype.sass";
 import personal from "../../images/personal.jpg";
 import cart from "../../images/cart.jpg";
 
-const Logotype = ({ authenticated }) => {
+const Logotype = ({ auth }) => {
   const authBlock = <div className="logotype-content__auth">
     <NavLink to="/home/log-in" className="logotype-content__logIn" activeClassName="is-active">
       Log In
@@ -27,7 +27,7 @@ const Logotype = ({ authenticated }) => {
     </Link>
   </div>;
 
-  const ViewBlock = authenticated ? userBlock : authBlock;
+  const ViewBlock = auth ? userBlock : authBlock;
   return (
     <div className="logotype">
       <div className="container">
@@ -48,7 +48,7 @@ const mapStateToProps = (state) => {
 };
 
 Logotype.propTypes = {
-  authenticated: PropTypes.bool
+  auth: PropTypes.bool
 };
 
 export default connect(mapStateToProps, undefined, undefined, { pure: false })(Logotype);

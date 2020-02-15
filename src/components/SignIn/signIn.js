@@ -18,6 +18,7 @@ const SignIn = (props) => {
     regUser
   } = props;
 
+  console.log(props);
   const [{ loginValue, passwordValue, loginError, passwordError }, setFormValue] = useState({
     loginValue: "",
     passwordValue: "",
@@ -114,7 +115,7 @@ SignIn.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return state.signIn;
+  return state.authenticated;
 };
 
 export default compose(
