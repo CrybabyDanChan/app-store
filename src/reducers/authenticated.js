@@ -1,18 +1,16 @@
 export const initialState = {
   userName: "",
-  jwtToken: "",
   authenticated: false,
   error: false
 };
 
 const authenticated = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_TOKEN_AND_USER_NAME":
+    case "SET_USER_NAME":
       return {
         ...state,
-        userName: action.payload.username,
-        jwtToken: action.payload.token,
-        authenticated: !state.authenticated
+        userName: action.payload,
+        authenticated: true
       };
 
     case "SET_ERROR":
@@ -21,6 +19,21 @@ const authenticated = (state = initialState, action) => {
         authenticated: false,
         error: action.payload
       };
+
+    case "LOAD_AUTH":
+      return {
+        ...state,
+        authenticated: true
+      };
+
+    case "OUT_LOGIN":
+      return {
+        ...state,
+        userName: "",
+        authenticated: false,
+        error: false
+      };
+
     default:
       return state;
   }

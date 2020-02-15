@@ -1,6 +1,6 @@
 const setTokenAndUserName = (value) => {
   return {
-    type: "SET_TOKEN_AND_USER_NAME",
+    type: "SET_USER_NAME",
     payload: value
   };
 };
@@ -12,7 +12,19 @@ const setErrorAuth = (error) => {
   };
 };
 
+const logAuth = () => {
+  return {
+    type: "LOAD_AUTH"
+  };
+};
+const outLog = () => {
+  return {
+    type: "OUT_LOGIN"
+  };
+};
 export {
   setTokenAndUserName,
-  setErrorAuth
+  setErrorAuth,
+  logAuth,
+  outLog
 };

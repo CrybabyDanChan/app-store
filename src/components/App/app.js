@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Normalize from "react-normalize";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./app.sass";
 import Home from "../Page/Home";
@@ -8,8 +9,15 @@ import Products from "../Page/Products";
 import Logotype from "../Logotype";
 import Cart from "../Cart/cart";
 import CreateProducts from "../createProduts";
+import * as authenticatedActions from "../../actions/authenticatedActions";
 
-function App () {
+function App (props) {
+  const { logAuth, authenticated } = props;
+  useEffect(() => {
+    if(localStorage.token) {
+      logAuth();
+    }
+  }, []);
   return (
     <Fragment>
       <Normalize/>
@@ -36,11 +44,15 @@ function App () {
             render={() => {
               return <CreateProducts/>;
             }}/>
-          <Redirect from='/' to='/home/log-in'/>
+          <Redirect from='/' to="/home"/>
         </Switch>
       </div>
     </Fragment>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return state.authenticated;
+};
+
+export default connect(mapStateToProps, authenticatedActions, undefined, { pure: false })(App);

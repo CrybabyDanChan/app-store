@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { withRouter } from "react-router-dom";
 
 import compose from "../../compose";
 import "./logIn.sass";
@@ -15,8 +16,8 @@ const LogIn = (props) => {
     validatePassword,
     setLoginValue,
     setPasswordValue,
-    userLogIn
-
+    userLogIn,
+    history
   } = props;
 
   const [{ loginValue, passwordValue, loginError, passwordError }, setFormValue] = useState({
@@ -37,6 +38,7 @@ const LogIn = (props) => {
   const enterUser = (event) => {
     event.preventDefault();
     userLogIn();
+    history.push("/home/welcome");
   };
 
   const handleChangeLogin = (event) => {
@@ -112,5 +114,6 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, actionsLogIn),
-  validate
+  validate,
+  withRouter
 )(LogIn);

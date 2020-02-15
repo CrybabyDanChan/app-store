@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 import "./welcomeToUser.sass";
 import Button from "../Button";
 
-const WelcomeToUser = ({userName}) => {
+const WelcomeToUser = (props) => {
+  const { userName } = props;
   return (
     <div className="welcome-to-user">
       <div className="welcome-to-user__title">Hello, {userName}!</div>
@@ -25,4 +26,4 @@ const mapStateToProps = (state) => {
   return state.authenticated;
 };
 
-export default connect(mapStateToProps)(WelcomeToUser);
+export default connect(mapStateToProps, undefined, undefined, { pure: false })(WelcomeToUser);

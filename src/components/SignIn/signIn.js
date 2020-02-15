@@ -35,8 +35,6 @@ const SignIn = (props) => {
 
   const generateBtn = !(!passwordError && !loginError && loginValue !== "" && passwordValue !== "");
 
-  console.log(generateBtn, loginError, passwordError);
-
   const registerUser = (event) => {
     event.preventDefault();
     regUser();
