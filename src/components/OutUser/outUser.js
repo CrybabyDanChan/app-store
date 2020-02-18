@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import "./outUser.sass";
 import compose from "../../compose";
-
 import Button from "../Button";
 import * as actionsAthenticated from "../../actions/authenticatedActions";
 
@@ -30,6 +30,12 @@ const OutUser = (props) => {
 
 const mapStateToProps = (state) => {
   return state.authenticated;
+};
+
+OutUser.propTypes = {
+  outLog: PropTypes.func,
+  history: PropTypes.any,
+  auth: PropTypes.bool
 };
 
 export default compose(

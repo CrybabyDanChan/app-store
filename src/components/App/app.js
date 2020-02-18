@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import Normalize from "react-normalize";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import "./app.sass";
 import Home from "../Page/Home";
@@ -13,9 +14,11 @@ import * as authenticatedActions from "../../actions/authenticatedActions";
 
 function App (props) {
   const { logAuth } = props;
+
   useEffect(() => {
     logAuth();
   }, []);
+
   return (
     <Fragment>
       <Normalize/>
@@ -49,8 +52,8 @@ function App (props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return state.authenticated;
+App.propTypes = {
+  logAuth: PropTypes.func
 };
 
-export default connect(mapStateToProps, authenticatedActions, undefined, { pure: false })(App);
+export default connect(undefined, authenticatedActions, undefined, { pure: false })(App);

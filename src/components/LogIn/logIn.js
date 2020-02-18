@@ -93,7 +93,7 @@ const LogIn = (props) => {
           </label>
           <label className="log-in-form__label log-in-form__label_indent">
             Password
-            <input type="text"
+            <input type="password"
               name="password"
               className={generateInputClass(passwordError, passwordValue)}
               onChange={handleChangePassword}

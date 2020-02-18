@@ -1,23 +1,68 @@
 import React, { useState, useRef } from "react";
 import className from "classnames";
+import { connect } from "react-redux";
 
 import "./createProducts.sass";
 import defaultImg from "../../images/defaultImg.png";
 import download from "../../images/download.png";
 import Button from "../Button";
 import Counter from "../Counter";
+import * as createProductsActions from "../../actions/createProductsActions";
 
-const CreateProducts = () => {
-  const [urlImg, setImg] = useState();
-  const latestImg = useRef("");
+const CreateProducts = (props) => {
+  const { loadCreateProduct } = props;
+  const [{ urlImg, valueTitle, valueDescription, imgFile }, setForm] = useState({
+    urlImg: null,
+    imgFile: null,
+    valueTitle: "",
+    valueDescription: ""
+  });
+  const [count, setCount] = useState(1);
+  const refImg = useRef();
   const dropPlace = useRef();
 
-  const handleImgChange = (event) => {
+  const handleImgInput = (event) => {
     const reader = new FileReader();
     reader.onload = (e) => {
-      setImg(e.target.result);
+      setForm(state => {
+        return {
+          ...state,
+          urlImg: e.target.result,
+          imgFile: refImg.current.files[0]
+        };
+      });
     };
-    reader.readAsDataURL(latestImg.current.files[0]);
+    reader.readAsDataURL(refImg.current.files[0]);
+  };
+
+  const handleInputTitle = (event) => {
+    const value = event.target.value;
+    setForm(state => {
+      return {
+        ...state,
+        valueTitle: value
+      };
+    });
+  };
+
+  const handleInputDescription = (event) => {
+    const value = event.target.value;
+    setForm(state => {
+      return {
+        ...state,
+        valueDescription: value
+      };
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const valueForm = {
+      valueTitle,
+      valueDescription,
+      imgFile
+    };
+    loadCreateProduct(valueForm);
   };
 
   const dropSetImg = (event) => {
@@ -26,7 +71,13 @@ const CreateProducts = () => {
     const img = event.dataTransfer.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-      setImg(e.target.result);
+      setForm(state => {
+        return {
+          ...state,
+          urlImg: e.target.result,
+          imgFile: img
+        };
+      });
     };
     reader.readAsDataURL(img);
     dropPlace.current.classList.remove("create-products-wrapper__border-dashed");
@@ -56,19 +107,29 @@ const CreateProducts = () => {
         <div className="create-products-wrapper">
           <div className="create-products-wrapper__title">Create</div>
           <div className="create-products-wrapper__items">
-            <form action="" className="create-products-wrapper__form">
+            <form className="create-products-wrapper__form" onSubmit={handleSubmit} name="createProduct">
               <div className="create-products-wrapper__input-wrapper">
                 <label className="create-products-wrapper__form-label">
                   <div className="create-products-wrapper__subtitle">Title</div>
-                  <input type="text" className="create-products-wrapper__input"/>
+                  <input type="text"
+                    className="create-products-wrapper__input"
+                    value={valueTitle}
+                    onChange={handleInputTitle}
+                    name="title"
+                  />
                 </label>
                 <label className="create-products-wrapper__form-label create-products-wrapper_indent-top">
                   <div className="create-products-wrapper__subtitle">Description</div>
-                  <textarea cols="30" rows="5" className="create-products-wrapper__textarea"/>
+                  <textarea cols="30" rows="5"
+                    className="create-products-wrapper__textarea"
+                    value={valueDescription}
+                    onChange={handleInputDescription}
+                    name="description"
+                  />
                 </label>
                 <div className="create-products-wrapper__counter-wrapper">
                   <div className="create-products-wrapper__subtitle create-products-wrapper_indent-right">Count</div>
-                  <Counter/>
+                  <Counter method={setCount} count={count}/>
                 </div>
                 <div className="create-products-wrapper__btn-wrapper">
                   <Button text={"add"}/>
@@ -88,9 +149,10 @@ const CreateProducts = () => {
                   <label className="create-products-wrapper__form-file-label">
                     <div className="create-products-wrapper__subtitle create-products-wrapper__subtitle_abs">Image</div>
                     <input type="file"
-                      ref={latestImg}
-                      onChange={handleImgChange}
-                      className="create-products-wrapper__input-file"/>
+                      ref={refImg}
+                      onChange={handleImgInput}
+                      className="create-products-wrapper__input-file"
+                      name="avatar"/>
                     <div className={classNameDownload}>
                       <img src={download} alt="download"/>
                       {generateDownloadText}
@@ -106,4 +168,4 @@ const CreateProducts = () => {
   );
 };
 
-export default CreateProducts;
+export default connect(undefined, createProductsActions)(CreateProducts);

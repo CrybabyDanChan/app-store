@@ -18,7 +18,6 @@ const SignIn = (props) => {
     regUser
   } = props;
 
-  console.log(props);
   const [{ loginValue, passwordValue, loginError, passwordError }, setFormValue] = useState({
     loginValue: "",
     passwordValue: "",

@@ -8,7 +8,7 @@ import MyProducts from "../../MyProducts";
 import AllProducts from "../../AllProducts";
 import Button from "../../Button";
 
-const Products = ({ authenticated }) => {
+const Products = ({ auth }) => {
   const authLinks = <Fragment>
     <NavLink to="/products/all" className="products-wrapper__link"
       activeClassName="is-active">
@@ -42,7 +42,7 @@ const Products = ({ authenticated }) => {
     <Button addProduct/>
   </Link>;
 
-  const viewAuthBlok = (trueBlock, falseBlock = null, provision = authenticated) => {
+  const viewAuthBlok = (trueBlock, falseBlock = null, provision = auth) => {
     const viewBlock = provision ? trueBlock : falseBlock;
     return viewBlock;
   };
@@ -72,7 +72,7 @@ const mapStateToProps = (state) => {
 };
 
 Products.propTypes = {
-  authenticated: PropTypes.bool
+  auth: PropTypes.bool
 };
 
 export default connect(mapStateToProps, undefined, undefined, { pure: false })(Products);

@@ -9,7 +9,7 @@ import LogIn from "../../LogIn";
 import WelcomeToUser from "../../WelcomeToUser/welcomeToUser";
 import OutUser from "../../outUser";
 
-const Home = ({ authenticated }) => {
+const Home = ({ auth }) => {
   return (
     <div className="home">
       <div className="home__wrapper">
@@ -42,8 +42,8 @@ const Home = ({ authenticated }) => {
               return <OutUser/>;
             }}
           />
-          <Redirect to={authenticated ? "/home/welcome" : "/home/log-in"}/>
-        </Switch>;
+          <Redirect to={auth ? "/home/welcome" : "/home/log-in"}/>
+        </Switch>
       </div>
     </div>
   );
@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
 };
 
 Home.propTypes = {
-  authenticated: PropTypes.bool
+  auth: PropTypes.bool
 };
 
 export default connect(mapStateToProps, undefined, undefined, { pure: false })(Home);

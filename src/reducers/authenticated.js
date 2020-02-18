@@ -22,8 +22,7 @@ const authenticated = (state = initialState, action) => {
 
     case "LOAD_AUTH":
       return {
-        ...state,
-        auth: true
+        ...state
       };
 
     case "OUT_LOGIN":

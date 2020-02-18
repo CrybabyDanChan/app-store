@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -14,9 +14,10 @@ const Item = (props) => {
     avatar,
     description,
     beInCart,
-    count,
     addToCart
   } = props;
+
+  const [count, setCount] = useState(1);
 
   const generateBtn = beInCart ? <Button deleting id ={id} actionMethod={addToCart}/>
     : <Button addProductsToCart id ={id} actionMethod={addToCart}/>;
@@ -31,7 +32,7 @@ const Item = (props) => {
             <div className="item-wrapper__text">{description}</div>
           </div>
           <div className="item-wrapper__counter">
-            <Counter/>
+            <Counter method={setCount} count={count}/>
           </div>
           {generateBtn}
         </div>
@@ -45,7 +46,6 @@ Item.propTypes = {
   name: PropTypes.string,
   avatar: PropTypes.string,
   description: PropTypes.string,
-  count: PropTypes.number,
   beInCart: PropTypes.bool,
   addToCart: PropTypes.func
 };
