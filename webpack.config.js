@@ -119,7 +119,7 @@ module.exports = (env = {}) => {
     },
 
     plugins: getPlugins(),
-
+    devtool: "eval-source-map",
     devServer: {
       contentBase: path.join(__dirname, "dist"),
       open: true,
