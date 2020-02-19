@@ -22,7 +22,7 @@ const Counter = (props) => {
         onClick={handleDecClick}>
         <span></span>
       </button>
-      <div className="counter__result">{count}</div>
+      <input className="counter__result" value={count} onChange={() => method(event.target.value)}/>
       <button className="counter__inc"
         onClick={handleIncClick}>
         <span></span>

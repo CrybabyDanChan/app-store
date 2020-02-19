@@ -124,7 +124,8 @@ module.exports = (env = {}) => {
       contentBase: path.join(__dirname, "dist"),
       open: true,
       historyApiFallback: true,
-      port: 8082
+      port: 8082,
+      hot: true
     }
   };
 };

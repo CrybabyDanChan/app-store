@@ -43,7 +43,6 @@ const LogIn = (props) => {
   };
 
   const enterUser = (event) => {
-    event.preventDefault();
     userLogIn();
   };
 
@@ -81,7 +80,7 @@ const LogIn = (props) => {
     <div className="log-in">
       <div className="log-in-form">
         <h1 className="log-in-form__title">Log In</h1>
-        <form className="log-in-form__form" onSubmit={enterUser}>
+        <div className="log-in-form__form">
           <label className="log-in-form__label">
             Login / Email address
             <input type="text"
@@ -97,15 +96,15 @@ const LogIn = (props) => {
               name="password"
               className={generateInputClass(passwordError, passwordValue)}
               onChange={handleChangePassword}
-              value = {passwordValue}
-            ></input>
+              value = {passwordValue}/>
           </label>
-          <Button text={"log in"} additionalClass={"btn_center"}/>
-        </form>
+          <Button text="log in" additionalClass="btn_center" method={enterUser}/>
+        </div>
       </div>
     </div>
   );
 };
+
 LogIn.propTypes = {
   validateLogin: PropTypes.func,
   validatePassword: PropTypes.func,
