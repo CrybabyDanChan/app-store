@@ -11,9 +11,9 @@ const fetchData = (data) => {
 
 function * workerLoadData () {
   const data = yield call(fetchData);
-  data.map(product => {
-    fetch(`http://localhost:3000/products/download?file=${product.avatar}`).then(res => console.log(res));
-  })
+  // data.map(product => {
+  //   fetch(`http://localhost:3000/products/download?file=${product.avatar}`).then(res => console.log(res));
+  // })
 }
 
 export function * watchLoadAllProducts () {

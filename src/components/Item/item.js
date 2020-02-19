@@ -19,8 +19,13 @@ const Item = (props) => {
 
   const [count, setCount] = useState(1);
 
-  const generateBtn = beInCart ? <Button deleting id ={id} actionMethod={addToCart}/>
-    : <Button addProductsToCart id ={id} actionMethod={addToCart}/>;
+  const generateBtn = beInCart
+    ? <Button type = "deleting"
+      text="delete"
+      method={() => addToCart(id)}/>
+    : <Button type = "addToCart"
+      text="add to cart"
+      method={() => addToCart(id)}/>;
 
   return (
     <div className="item">

@@ -99,7 +99,10 @@ const SignIn = (props) => {
               value = {passwordValue}
             ></input>
           </label>
-          <Button text={"sign in"} additionalClass={"btn_center"} disabled={generateBtn}/>
+          <Button text="sign in"
+            type = {generateBtn ? "disabled" : null}
+            additionalClass="btn_center"
+            disabled={generateBtn}/>
         </form>
       </div>
     </div>

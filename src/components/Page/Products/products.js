@@ -39,7 +39,7 @@ const Products = ({ auth }) => {
   </Switch>;
 
   const authButton = <Link to="/create-products" className="products-wrapper__link">
-    <Button addProduct/>
+    <Button text="add product" type="addProduct"/>
   </Link>;
 
   const viewAuthBlok = (trueBlock, falseBlock = null, provision = auth) => {

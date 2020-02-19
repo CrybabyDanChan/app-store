@@ -1,6 +1,13 @@
 /* eslint-disable no-case-declarations */
 export const initialState = {
-  arrayOfAllProducts: [],
+  arrayOfAllProducts: [
+    {
+      id: 1,
+      name: "Iphone 10",
+      avatar: "https://izone.pl/21526-large_default/apple-iphone-11-zielony-64gb.jpg",
+      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus, impedit."
+    }
+  ],
   arrayOfMyProducts: [],
   arrayOfCart: []
 };

@@ -14,9 +14,7 @@ const AllProducts = (props) => {
 
   return (
     <div className="all-products">
-      {arrayOfAllProducts.map(product => {
-        return <Item key={product.id} {...product}/>;
-      })}
+      {arrayOfAllProducts.map(product => <Item key={product.id} {...product}/>)}
     </div>
   );
 };
@@ -26,7 +24,8 @@ const mapStateToProps = (state) => {
 };
 
 AllProducts.propTypes = {
-  arrayOfAllProducts: PropTypes.arrayOf(PropTypes.object)
+  arrayOfAllProducts: PropTypes.arrayOf(PropTypes.object),
+  loadAllProducts: PropTypes.func
 };
 
 export default connect(mapStateToProps, productsActions)(AllProducts);
