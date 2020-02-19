@@ -1,7 +1,8 @@
 export const initialState = {
   title: "",
   description: "",
-  imgFile: null
+  imgFile: null,
+  count: 1
 };
 
 const createProducts = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const createProducts = (state = initialState, action) => {
         ...state,
         title: action.payload.valueTitle,
         description: action.payload.valueDescription,
-        imgFile: action.payload.imgFile
+        imgFile: action.payload.imgFile,
+        count: action.payload.count
       };
     default:
       return state;

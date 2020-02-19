@@ -7,7 +7,6 @@ import "./home.sass";
 import SignIn from "../../SignIn";
 import LogIn from "../../LogIn";
 import WelcomeToUser from "../../WelcomeToUser/welcomeToUser";
-import OutUser from "../../outUser";
 
 const Home = ({ auth }) => {
   return (
@@ -33,13 +32,6 @@ const Home = ({ auth }) => {
             path="/home/welcome"
             render={() => {
               return <WelcomeToUser/>;
-            }}
-          />
-          <Route
-            exact
-            path="/home/out"
-            render={() => {
-              return <OutUser/>;
             }}
           />
           <Redirect to={auth ? "/home/welcome" : "/home/log-in"}/>

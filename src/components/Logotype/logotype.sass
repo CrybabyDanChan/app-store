@@ -1,6 +1,7 @@
 @import "../../styles/_mixin"
 
 .logotype-content
+    position: relative
     height: 80px
     background: #FFFFFF
     display: flex
@@ -33,6 +34,35 @@
         text-transform: uppercase
         color: #7E8AA8
         @include hover-link
+    &__log-out
+        position: absolute
+        display: flex
+        justify-content: center
+        align-items: center
+        right: 20px
+        top: 68px
+        width: 130px
+        height: 53px
+        background: #FFFFFF
+        border-radius: 2px
+        font-size: 14px
+        letter-spacing: 0.02em
+        color: #7E8AA8
+        z-index: 100
+        cursor: pointer
+        border: 1px solid rgba(231, 225, 225, 0.3)
+        @include hover-link
+        span
+            display: block
+            z-index: -100
+            top: -5px
+            right: 30px
+            position: absolute
+            background: #FFFFFF
+            transform: rotate(-45deg)
+            width: 12px
+            height: 12px
+            border: 1px solid rgba(231, 225, 225, 0.3)
     &__auth
         margin-left: 50px
         display: flex

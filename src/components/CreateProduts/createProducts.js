@@ -60,9 +60,20 @@ const CreateProducts = (props) => {
     const valueForm = {
       valueTitle,
       valueDescription,
-      imgFile
+      imgFile,
+      count
     };
-    loadCreateProduct(valueForm);
+    if (imgFile && valueTitle !== "" && valueDescription !== "") {
+      loadCreateProduct(valueForm);
+      setForm(state => {
+        return {
+          urlImg: null,
+          imgFile: null,
+          valueTitle: "",
+          valueDescription: ""
+        };
+      });
+    }
   };
 
   const dropSetImg = (event) => {
