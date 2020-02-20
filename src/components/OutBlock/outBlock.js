@@ -7,8 +7,10 @@ const OutBlock = (props) => {
   const { method } = props;
   return (
     <div className="out-block" onClick={method}>
-      <span></span>
-    Log Out
+      <div className="out-block__wrapper">
+        <span></span>
+        Log Out
+      </div>
     </div>
   );
 };

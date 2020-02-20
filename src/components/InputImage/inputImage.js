@@ -12,6 +12,7 @@ const InputImage = (props) => {
 
   const dropGetImg = (event) => {
     event.stopPropagation();
+    event.preventDefault();
     const img = event.dataTransfer.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -24,12 +25,13 @@ const InputImage = (props) => {
       });
     };
     reader.readAsDataURL(img);
-    dropPlace.current.classList.remove("create-products-wrapper__border-dashed");
+    dropPlace.current.classList.remove("inputImage__border-dashed");
   };
 
   const handleDrag = (event) => {
     event.stopPropagation();
-    dropPlace.current.classList.add("create-products-wrapper__border-dashed");
+    event.preventDefault();
+    dropPlace.current.classList.add("inputImage__border-dashed");
   };
 
   const handleImgInput = () => {
