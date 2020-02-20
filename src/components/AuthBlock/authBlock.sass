@@ -1,0 +1,29 @@
+@import "../../styles/mixin"
+@import "../../styles/variables"
+    
+.auth-block
+    margin-left: 50px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    &__logIn
+        font-family: Montserrat
+        font-style: normal
+        font-weight: normal
+        font-size: 14px
+        letter-spacing: 0.02em
+        color: $second-color
+        margin-right: 20px
+        @include hover-link
+    &__line
+        border: 1px solid $grey
+        height: 28px
+    &__signIn
+        font-family: Montserrat
+        font-style: normal
+        font-weight: normal
+        font-size: 14px
+        letter-spacing: 0.02em
+        color: $second-color
+        margin-left: 20px
+        @include hover-link

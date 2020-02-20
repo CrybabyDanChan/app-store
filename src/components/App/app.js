@@ -9,7 +9,7 @@ import Home from "../Page/Home";
 import Products from "../Page/Products";
 import Logotype from "../Logotype";
 import Cart from "../Cart/cart";
-import CreateProducts from "../createProduts";
+import CreateProduct from "../CreateProduct";
 import * as authenticatedActions from "../../actions/authenticatedActions";
 
 function App (props) {
@@ -41,9 +41,9 @@ function App (props) {
               return <Cart/>;
             }}/>
           <Route
-            path="/create-products"
+            path="/create-product"
             render={() => {
-              return <CreateProducts/>;
+              return <CreateProduct/>;
             }}/>
           <Redirect from='/' to="/home"/>
         </Switch>

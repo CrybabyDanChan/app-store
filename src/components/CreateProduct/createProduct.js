@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import "./createProducts.sass";
+import "./createProduct.sass";
 import Button from "../Button";
 import Counter from "../Counter";
 import * as createProductsActions from "../../actions/createProductsActions";
 import InputImage from "../InputImage";
 
-const CreateProducts = (props) => {
+const CreateProduct = (props) => {
   const { loadCreateProduct } = props;
   const [{ urlImg, valueTitle, valueDescription, imgFile }, setForm] = useState({
     urlImg: null,
@@ -55,6 +55,7 @@ const CreateProducts = (props) => {
       valueTitle: "",
       valueDescription: ""
     });
+    setCount(1);
   };
 
   return (
@@ -101,8 +102,8 @@ const CreateProducts = (props) => {
   );
 };
 
-CreateProducts.propTypes = {
+CreateProduct.propTypes = {
   loadCreateProduct: PropTypes.func
 };
 
-export default connect(undefined, createProductsActions)(CreateProducts);
+export default connect(undefined, createProductsActions)(CreateProduct);

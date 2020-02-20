@@ -38,7 +38,7 @@ const Products = ({ auth }) => {
     <Redirect from="/products/" to="/products/all"/>
   </Switch>;
 
-  const authButton = <Link to="/create-products" className="products-wrapper__link">
+  const authButton = <Link to="/create-product" className="products-wrapper__link">
     <Button text="add product" type="addProduct"/>
   </Link>;
 

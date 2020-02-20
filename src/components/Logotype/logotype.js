@@ -1,56 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import compose from "../../compose";
 
 import * as actionsAthenticated from "../../actions/authenticatedActions";
 import "./logotype.sass";
-import personal from "../../images/personal.jpg";
-import cart from "../../images/cart.jpg";
-import compose from "../../compose";
+import AuthBlock from "../AuthBlock";
+import UserBlock from "../UserBlock";
+import OutBlock from "../OutBlock";
 
 const Logotype = ({ auth, outLog, history }) => {
+  const [out, setOut] = useState(false);
+
   useEffect(() => {
     if (!auth) {
       history.push("/home/log-in");
     }
   }, [auth]);
 
-  const [out, setOut] = useState(false);
-
-  const authBlock = <div className="logotype-content__auth">
-    <NavLink to="/home/log-in" className="logotype-content__logIn" activeClassName="is-active">
-      Log In
-    </NavLink>
-    <span className="line"></span>
-    <NavLink to="/home/sign-in" className="logotype-content__signIn" activeClassName="is-active">
-      Sign In
-    </NavLink>
-  </div>;
-
-  const userBlock = <div className="logotype-content__user">
-    <div className="logotype-content__personal"
-      onClick={() => setOut(state => !state)}
-    >
-      <img src={personal} alt="personal"/>
-    </div>
-    <Link to="/cart" className="logotype-content__cart">
-      <img src={cart} alt="cart"></img>
-    </Link>
-  </div>;
-
-  const outLogin = (event) => {
+  const outLogin = () => {
     localStorage.removeItem("token");
     outLog();
     setOut(false);
   };
 
-  const viewOut = out ? <div className="logotype-content__log-out" onClick={outLogin}>
-    <span></span>
-    Log Out
-  </div> : null;
+  const viewOut = out ? <OutBlock method={outLogin}/> : null;
 
-  const ViewBlock = auth ? userBlock : authBlock;
+  const viewBlock = auth
+    ? <UserBlock method={() => setOut(state => !state)}/>
+    : <AuthBlock/>;
+
   return (
     <div className="logotype">
       <div className="container">
@@ -58,7 +38,7 @@ const Logotype = ({ auth, outLog, history }) => {
           <Link to="/" className="logotype-content__title">Logotype</Link>
           <div className="logotype-content__wrapper">
             <Link to="/products" className="logotype-content__products">Products</Link>
-            { ViewBlock }
+            { viewBlock }
           </div>
           {viewOut}
         </div>
