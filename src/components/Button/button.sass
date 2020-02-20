@@ -1,0 +1,42 @@
+@import "../../styles/mixin"
+@import "../../styles/variables"
+
+
+.btn
+    padding: 0
+    width: 160px
+    height: 44px
+    background: $main-color
+    border-radius: 2px
+    font-style: normal
+    font-weight: bold
+    font-size: 13px
+    letter-spacing: 0.02em
+    text-transform: uppercase
+    color: #FFFFFF
+    border: none
+    cursor: pointer
+    line-height: 1px
+    @include hover-button
+    &_center
+        margin: 0 auto
+        margin-top: 30px
+    &_left
+        margin-left: 20px
+    &__link
+        color: #FFFFFF
+        text-decoration: none
+    &__img
+        display: block
+        margin-right: 7px
+    &_img-flex
+        display: flex
+        align-items: center
+        justify-content: center
+    &_cancel
+        border: 1px solid $main-color
+        background: #F8F9FF
+        color: $main-color
+        &:hover
+            background:#F0F4FE
+

@@ -1,0 +1,45 @@
+@import "../../styles/mixin"
+@import "../../styles/variables"
+
+.item
+    margin-top: 20px
+.item-wrapper
+    background: #FFFFFF
+    border-radius: 2px
+    height: 169px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 0 52px 0 45px
+    &__img
+        display: block
+        height: 80px
+        width: 80px
+        margin-right: 55px
+    &__description
+        max-width: 520px
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        margin-right: 124px   
+    &__title
+        font-style: normal
+        font-weight: bold
+        font-size: 18px
+        line-height: 22px
+        color: $second-color
+        margin-bottom: 17px
+    &__text
+        font-style: normal
+        font-weight: normal
+        font-size: 14px
+        color: $second-color
+    span
+        display: block
+        width: 14px
+        height: 2px
+        background: $main-color
+    &__counter
+        width: 142px
+        margin-right: 65px
+    

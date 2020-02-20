@@ -1,0 +1,140 @@
+@import "../../styles/mixin"
+@import "../../styles/variables"
+    
+.create-products
+    background: #F0F4FE
+    min-height: 980px
+
+.create-products-wrapper
+    &__title
+        font-style: normal
+        font-weight: bold
+        font-size: 36px
+        line-height: 44px
+        color: $black
+        padding-top: 50px
+    &__subtitle
+        font-style: normal
+        font-weight: bold
+        font-size: 14px
+        letter-spacing: 0.02em
+        color: $second-color
+        &_abs
+            position: absolute
+            top: -40px
+            left: -10px
+    &__items
+        padding-top: 50px 
+        margin-top: 30px
+        height: 532px
+        background: #FFFFFF
+    &__form
+        display: flex
+        justify-content: space-between
+        margin: 0 50px
+    &__input-wrapper
+        height: 373px
+        display: flex
+        flex-direction: column
+        justify-content: flex-start
+    &__counter-wrapper
+        margin-top: 26px
+        display: flex
+        align-items: center
+        justify-content: flex-start
+    &__btn-wrapper
+        margin-top: 50px
+        width: 340px
+        display: flex
+        justify-content: space-between
+    &__form-label
+        display: flex
+        flex-direction: column
+        font-style: normal
+        font-weight: normal
+        font-size: 14px
+        line-height: 160%
+    &_indent-top
+        margin-top: 30px
+    &_indent-right
+        margin-right: 30px
+    &__input
+        padding-left: 20px
+        margin-top: 12px
+        width: 726px
+        height: 44px
+        background: #FFFFFF
+        border: 1px solid #5E98FF
+        box-sizing: border-box
+        border-radius: 2px
+    &__textarea
+        padding-left: 20px
+        padding-top: 2px
+        margin-top: 12px
+        width: 726px
+        height: 88px
+        outline: none
+        border: 1px solid #DEE3F0
+        box-sizing: border-box
+        border-radius: 2px
+        resize: none
+    &__form-file-wrap
+        position: relative
+        margin-top: 32px
+        width: 373px
+        height: 373px
+        border: 10px solid #F0F4FE
+    &__drop-place
+        position: relative
+        width: 372px
+        height: 372px
+    &__drop-place-title
+        width: 272px
+        position: absolute
+        bottom: 152px
+        left: 50%
+        transform: translateX(-50%)
+        margin: 0 auto
+        font-size: 14px
+        color: $black
+    &__input-file
+        visibility: hidden
+    &__border-dashed
+        transition: 0.5s all
+        border: 1px dashed #DEE3F0
+    &__form-file-download
+        width: 173px
+        display: flex
+        justify-content: space-between
+        position: absolute
+        bottom: 115px
+        left: 50%
+        transform: translateX(-50%)
+        font-style: normal
+        font-weight: 600
+        font-size: 14px
+        letter-spacing: 0.02em
+        text-transform: uppercase
+        color: $main-color
+    &_upload
+        width: 200px
+        bottom: 58px
+        display: flex
+        justify-content: space-between
+        position: absolute
+        left: 50%
+        transform: translateX(-50%)
+        font-style: normal
+        font-weight: 600
+        font-size: 14px
+        letter-spacing: 0.02em
+        text-transform: uppercase
+        color: $main-color
+    &__form-file-img
+        max-width: 200px
+        max-width: 200px
+        display: block
+        position: absolute
+        top: 35%
+        left: 50%
+        transform: translate(-50%, -35%)

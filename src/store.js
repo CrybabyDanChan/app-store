@@ -1,10 +1,17 @@
-import { createStore, applyMiddleware } from "redux";
-import createSagaMiddleware from "redux-saga";
+import { createStore, combineReducers } from "redux";
 
-import reducer from "./reducers";
+import signIn from "./reducers/signIn";
+import logIn from "./reducers/logIn";
+import authenticated from "./reducers/authenticated";
+import products from "./reducers/products";
 
-const sagaMiddelware = createSagaMiddleware();
+const reducer = combineReducers({
+  signIn,
+  logIn,
+  authenticated,
+  products
+});
+
 const store = createStore(reducer);
-// sagaMiddelware.run(watchLoadData);
 
 export default store;

@@ -1,0 +1,45 @@
+@import "../../../styles/mixin"
+@import "../../../styles/variables"
+.products
+    background: #F0F4FE
+    min-height: 980px
+.products-wrapper
+    &__bar
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding-top: 50px
+    &__title
+        font-style: normal
+        font-weight: bold
+        font-size: 36px
+        text-align: center
+        color: $black
+    &__links
+        margin-top: 35px
+    &__link
+        text-decoration: none
+        font-style: normal
+        font-weight: normal
+        font-size: 15px
+        color: $second-color
+        position: relative
+        &::before
+            content: ''
+            bottom: -6px
+            right: 0
+            position: absolute
+            width: 0%
+            height: 3px
+            background-color: $main-color
+            transition: 0.5s
+        @include hover-link
+        &_indent
+            margin-left: 30px
+    .is-active
+        color: $black
+        &::before
+            width: 100%
+            left: 0
+    &__items
+        
