@@ -3,8 +3,8 @@ import { setTokenAndUserName, setErrorAuth } from "../actions/authenticatedActio
 
 const fetchData = () => {
   const token = localStorage.token;
-
-  return fetch("http://localhost:3000/profile", {
+  const url = "http://localhost:3000/profile";
+  return fetch(url, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`

@@ -18,12 +18,12 @@ const authBlock = ({ type }) => {
   </Fragment>;
 
   const authLinksForProducts = <Fragment>
-    <NavLink to="/products/all" className="products-wrapper__link"
-      activeClassName="is-active">
+    <NavLink to="/products/all" className="auth-block__link"
+      activeClassName="auth-block__is-active_products">
       All Products
     </NavLink>
-    <NavLink to="/products/my" className="products-wrapper__link products-wrapper__link_indent"
-      activeClassName="is-active">
+    <NavLink to="/products/my" className="auth-block__link auth-block__link_indent"
+      activeClassName="auth-block__is-active_products">
     My Products
     </NavLink>
   </Fragment>;

@@ -3,11 +3,12 @@ import { setTokenAndUserName, setErrorAuth } from "../actions/authenticatedActio
 import { getLogIn } from "./selectors";
 
 const fetchData = (userData) => {
+  const url = "http://localhost:3000/auth/login";
   const user = {
     username: userData.login,
     password: userData.password
   };
-  return fetch("http://localhost:3000/auth/login", {
+  return fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

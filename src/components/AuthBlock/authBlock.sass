@@ -29,5 +29,29 @@
         color: $second-color
         margin-left: 20px
         @include hover-link
+    &__link
+        text-decoration: none
+        font-style: normal
+        font-weight: normal
+        font-size: 15px
+        color: $second-color
+        position: relative
+        &::before
+            content: ''
+            bottom: -6px
+            right: 0
+            position: absolute
+            width: 0%
+            height: 3px
+            background-color: $main-color
+            transition: 0.5s
+        @include hover-link
+        &_indent
+            margin-left: 30px
     &__is-active
         color: $black
+        &_products
+            color: $black
+            &::before
+                width: 100%
+                left: 0

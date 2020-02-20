@@ -2,13 +2,14 @@ import { takeEvery, call, select } from "redux-saga/effects";
 import { getCreateProducts } from "./selectors";
 
 const fetchData = (data) => {
+  const url = "http://localhost:3000/products/add";
   const token = localStorage.token;
   const formData = new FormData();
   formData.append("avatar", data.imgFile);
   formData.append("title", data.title);
   formData.append("description", data.description);
   formData.append("count", data.count);
-  return fetch("http://localhost:3000/products/add", {
+  return fetch(url, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`

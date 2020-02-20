@@ -3,11 +3,12 @@ import { getSigIn } from "./selectors";
 import { setTokenAndUserName, setErrorAuth } from "../actions/authenticatedActions";
 
 const fetchData = (userData) => {
+  const url = "http://localhost:3000/users/register";
   const user = {
     name: userData.login,
     password: userData.password
   };
-  return fetch("http://localhost:3000/users/register", {
+  return fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

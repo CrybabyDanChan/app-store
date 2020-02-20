@@ -1,8 +1,9 @@
 import { takeEvery, call } from "redux-saga/effects";
 
 const fetchData = (data) => {
+  const url = "http://localhost:3000/products";
   const token = localStorage.token;
-  return fetch("http://localhost:3000/products", {
+  return fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`
     }
