@@ -52,7 +52,7 @@ const InputImage = (props) => {
   const generateDownloadText = !urlImg ? "download image" : "upload a new image";
 
   const classNameDownload = urlImg
-    ? "inputImage__form-file-download create-products-wrapper_upload"
+    ? "inputImage__form-file-download inputImage_upload"
     : "inputImage__form-file-download";
 
   const images = !urlImg ? defaultImg : urlImg;

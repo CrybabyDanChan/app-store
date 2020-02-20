@@ -37,25 +37,23 @@ const CreateProducts = (props) => {
     });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
+    if (!imgFile || valueTitle === "" || valueDescription === "") {
+      return;
+    }
     const valueForm = {
       valueTitle,
       valueDescription,
       imgFile,
       count
     };
-    if (imgFile && valueTitle !== "" && valueDescription !== "") {
-      loadCreateProduct(valueForm);
-      setForm(state => {
-        return {
-          urlImg: null,
-          imgFile: null,
-          valueTitle: "",
-          valueDescription: ""
-        };
-      });
-    }
+    loadCreateProduct(valueForm);
+    setForm({
+      urlImg: null,
+      imgFile: null,
+      valueTitle: "",
+      valueDescription: ""
+    });
   };
 
   return (

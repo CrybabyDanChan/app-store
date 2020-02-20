@@ -1,11 +1,15 @@
 @mixin hover-button 
   &:hover
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), #5E98FF;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)), $main-color;
     border-radius: 2px
 
 @mixin hover-link
   &:hover
-      color: #5E98FF
+      color: $main-color
+
+@mixin active-input
+  &:active
+      border: 1px solid $main-color
 
 @mixin input-error
   border: 1px solid #F2544A

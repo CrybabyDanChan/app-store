@@ -4,7 +4,6 @@ import { getCreateProducts } from "./selectors";
 const fetchData = (data) => {
   const token = localStorage.token;
   const formData = new FormData();
-  console.log(data.count);
   formData.append("avatar", data.imgFile);
   formData.append("title", data.title);
   formData.append("description", data.description);
