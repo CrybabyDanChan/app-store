@@ -29,7 +29,7 @@ const Logotype = ({ auth, outLog, history }) => {
 
   const viewBlock = auth
     ? <UserBlock method={() => setOut(state => !state)}/>
-    : <AuthBlock/>;
+    : <AuthBlock type="logotype"/>;
 
   return (
     <div className="logotype">

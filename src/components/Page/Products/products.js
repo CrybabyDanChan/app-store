@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { NavLink, Switch, Route, Redirect, Link } from "react-router-dom";
+import React from "react";
+import { Switch, Route, Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -7,37 +7,9 @@ import "./products.sass";
 import MyProducts from "../../MyProducts";
 import AllProducts from "../../AllProducts";
 import Button from "../../Button";
+import AuthBlock from "../../AuthBlock";
 
 const Products = ({ auth }) => {
-  const authLinks = <Fragment>
-    <NavLink to="/products/all" className="products-wrapper__link"
-      activeClassName="is-active">
-        All Products
-    </NavLink>
-    <NavLink to="/products/my" className="products-wrapper__link products-wrapper__link_indent"
-      activeClassName="is-active">
-      My Products
-    </NavLink>
-  </Fragment>;
-
-  const authBlock = <Switch>
-    <Route
-      path="/products/all"
-      exact
-      render={() => {
-        return <AllProducts/>;
-      }}
-    />
-    <Route
-      path="/products/my"
-      exact
-      render={() => {
-        return <MyProducts/>;
-      }}
-    />
-    <Redirect from="/products/" to="/products/all"/>
-  </Switch>;
-
   const authButton = <Link to="/create-product" className="products-wrapper__link">
     <Button text="add product" type="addProduct"/>
   </Link>;
@@ -56,10 +28,24 @@ const Products = ({ auth }) => {
             {viewAuthBlok(authButton)}
           </div>
           <div className="products-wrapper__links">
-            {viewAuthBlok(authLinks)}
+            {viewAuthBlok(<AuthBlock type="products"/>)}
           </div>
           <div className="products-wrapper__items">
-            {viewAuthBlok(authBlock, <AllProducts/>)}
+            <Switch>
+              <Route
+                path="/products/all"
+                exact
+                render={() => {
+                  return <AllProducts/>;
+                }}/>
+              <Route
+                path="/products/my"
+                exact
+                render={() => {
+                  return <MyProducts/>;
+                }}/>
+              <Redirect from="/products/" to="/products/all"/>
+            </Switch>
           </div>
         </div>
       </div>
