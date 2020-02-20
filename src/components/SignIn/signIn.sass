@@ -8,7 +8,7 @@
     transform: translate(-50%,-50%)    
     width: 519px
     height: 444px
-    background: #FFFFFF
+    background: $white
     border-radius: 2px
     &__title
         margin-top: 60px
@@ -17,7 +17,7 @@
         font-weight: bold
         font-size: 36px
         text-align: center
-        color: #32394B
+        color: $black
     &__form
         margin: 60px
         margin-top: 30px
@@ -28,7 +28,7 @@
         font-weight: bold
         font-size: 14px
         letter-spacing: 0.02em
-        color: #7E8AA8
+        color: $second-color
         &_indent
             margin-top: 30px
     &__input
@@ -36,14 +36,14 @@
         margin-top: 12px
         width: 100%
         height: 44px
-        background: #FFFFFF
-        border: 1px solid #DEE3F0
+        background: $white
+        border: 1px solid $grey
         box-sizing: border-box
         border-radius: 2px
         font-style: normal
         font-weight: normal
         font-size: 14px
-        color: #7E8AA8
+        color: $second-color
         &_error
             background: url("../../images/error.png") no-repeat 371px
             @include input-error
@@ -55,14 +55,14 @@
         margin-top: 30px
         width: 160px
         height: 44px
-        background: #5E98FF
+        background: $main-color
         border-radius: 2px
         font-style: normal
         font-weight: bold
         font-size: 13px
         letter-spacing: 0.02em
         text-transform: uppercase
-        color: #FFFFFF
+        color: $white
         border: none
         cursor: pointer
         @include hover-button 

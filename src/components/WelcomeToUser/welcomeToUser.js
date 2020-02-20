@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./welcomeToUser.sass";
 import Button from "../Button";
 
-const WelcomeToUser = () => {
+const WelcomeToUser = (props) => {
+  const { userName } = props;
+
   return (
     <div className="welcome-to-user">
-      <div className="welcome-to-user__title">Hello, Robert!</div>
+      <div className="welcome-to-user__title">Hello, {userName}!</div>
       <div className="welcome-to-user__wrapper">
         <Link to="/products" className="btn__link">
           <Button text = {"products"}/>
@@ -20,4 +23,8 @@ const WelcomeToUser = () => {
   );
 };
 
-export default WelcomeToUser;
+const mapStateToProps = (state) => {
+  return state.authenticated;
+};
+
+export default connect(mapStateToProps)(WelcomeToUser);

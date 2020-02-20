@@ -1,36 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
 import "./counter.sass";
 
 const Counter = (props) => {
-  const { methods } = props;
-
-  const [{ count }, setCount] = useState({ count: 1 });
+  const { method, count } = props;
 
   const handleIncClick = (event) => {
     event.preventDefault();
-    setCount(state => {
-      let newCount = state.count;
-      newCount++;
-      return {
-        ...state,
-        count: newCount
-      };
-    });
+    method(count + 1);
   };
 
   const handleDecClick = (event) => {
     event.preventDefault();
-    setCount(state => {
-      let newCount = state.count;
-      if (state.count >= 2) {
-        newCount--;
-      }
-      return {
-        ...state,
-        count: newCount
-      };
-    });
+    if (count >= 2) { method(count - 1); }
   };
 
   return (
@@ -39,7 +22,7 @@ const Counter = (props) => {
         onClick={handleDecClick}>
         <span></span>
       </button>
-      <div className="counter__result">{count}</div>
+      <input className="counter__result" value={count} onChange={() => method(event.target.value)}/>
       <button className="counter__inc"
         onClick={handleIncClick}>
         <span></span>
@@ -49,8 +32,9 @@ const Counter = (props) => {
   );
 };
 
-Counter.defaultProps = {
-  methods: false
+Counter.propTypes = {
+  method: PropTypes.func,
+  count: PropTypes.number
 };
 
 export default Counter;

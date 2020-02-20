@@ -10,7 +10,14 @@ const clearCart = () => {
   };
 };
 
+const loadAllProducts = () => {
+  return {
+    type: "LOAD_ALL_PRODUCTS"
+  };
+};
+
 export {
   addToCart,
-  clearCart
+  clearCart,
+  loadAllProducts
 };

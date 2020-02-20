@@ -1,0 +1,73 @@
+@import "../../styles/mixin"
+@import "../../styles/variables"
+    
+.inputImage
+    position: relative
+    margin-top: 32px
+    width: 373px
+    height: 373px
+    border: 10px solid $back-color
+    &__drop-place
+        position: relative
+        width: 372px
+        height: 372px
+    &__drop-place-title
+        width: 272px
+        position: absolute
+        bottom: 152px
+        left: 50%
+        transform: translateX(-50%)
+        margin: 0 auto
+        font-size: 14px
+        color: $black
+    &__input-file
+        visibility: hidden
+    &__border-dashed
+        transition: 0.5s all
+        border: 1px dashed $grey
+    &__form-file-download
+        width: 173px
+        display: flex
+        justify-content: space-between
+        position: absolute
+        bottom: 115px
+        left: 50%
+        transform: translateX(-50%)
+        font-style: normal
+        font-weight: 600
+        font-size: 14px
+        letter-spacing: 0.02em
+        text-transform: uppercase
+        color: $main-color
+    &_upload
+        width: 200px
+        bottom: 58px
+        display: flex
+        justify-content: space-between
+        position: absolute
+        left: 50%
+        transform: translateX(-50%)
+        font-style: normal
+        font-weight: 600
+        font-size: 14px
+        letter-spacing: 0.02em
+        text-transform: uppercase
+        color: $main-color
+    &__form-file-img
+        max-width: 200px
+        max-height: 200px
+        display: block
+        position: absolute
+        top: 35%
+        left: 50%
+        transform: translate(-50%, -35%)
+    &__subtitle
+        font-style: normal
+        font-weight: bold
+        font-size: 14px
+        letter-spacing: 0.02em
+        color: $second-color
+        &_abs
+            position: absolute
+            top: -40px
+            left: -10px

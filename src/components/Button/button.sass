@@ -13,18 +13,19 @@
     font-size: 13px
     letter-spacing: 0.02em
     text-transform: uppercase
-    color: #FFFFFF
+    color: $white
     border: none
     cursor: pointer
     line-height: 1px
     @include hover-button
     &_center
+        display: block
         margin: 0 auto
         margin-top: 30px
     &_left
         margin-left: 20px
     &__link
-        color: #FFFFFF
+        color: $white
         text-decoration: none
     &__img
         display: block
@@ -38,5 +39,19 @@
         background: #F8F9FF
         color: $main-color
         &:hover
-            background:#F0F4FE
+            background: $back-color
+    &__disabled
+        background: $grey
+        border-radius: 2px
+        color: $second-color
+        padding: 0
+        width: 160px
+        height: 44px
+        border-radius: 2px
+        font-style: normal
+        font-weight: bold
+        font-size: 13px
+        letter-spacing: 0.02em
+        text-transform: uppercase
+        border: none
 

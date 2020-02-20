@@ -1,15 +1,24 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Normalize from "react-normalize";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import "./app.sass";
 import Home from "../Page/Home";
 import Products from "../Page/Products";
 import Logotype from "../Logotype";
 import Cart from "../Cart/cart";
-import CreateProducts from "../createProduts";
+import CreateProduct from "../CreateProduct";
+import * as authenticatedActions from "../../actions/authenticatedActions";
 
-function App () {
+function App (props) {
+  const { logAuth } = props;
+
+  useEffect(() => {
+    logAuth();
+  }, []);
+
   return (
     <Fragment>
       <Normalize/>
@@ -18,7 +27,6 @@ function App () {
         <Switch>
           <Route
             path="/home"
-            exact
             render = { () => {
               return <Home/>;
             }}/>
@@ -33,16 +41,19 @@ function App () {
               return <Cart/>;
             }}/>
           <Route
-            path="/create-products"
-            exact
+            path="/create-product"
             render={() => {
-              return <CreateProducts/>;
+              return <CreateProduct/>;
             }}/>
-          <Redirect from='/' to='/home'/>
+          <Redirect from='/' to="/home"/>
         </Switch>
       </div>
     </Fragment>
   );
 }
 
-export default App;
+App.propTypes = {
+  logAuth: PropTypes.func
+};
+
+export default connect(undefined, authenticatedActions, undefined, { pure: false })(App);

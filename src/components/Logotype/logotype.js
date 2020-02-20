@@ -1,33 +1,36 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import compose from "../../compose";
 
+import * as actionsAthenticated from "../../actions/authenticatedActions";
 import "./logotype.sass";
-import personal from "../../images/personal.jpg";
-import cart from "../../images/cart.jpg";
+import AuthBlock from "../AuthBlock";
+import UserBlock from "../UserBlock";
+import OutBlock from "../OutBlock";
 
-const Logotype = ({ authenticated }) => {
-  const authBlock = <div className="logotype-content__auth">
-    <NavLink to="/home/log-in" className="logotype-content__logIn" activeClassName="is-active">
-      Log In
-    </NavLink>
-    <span className="line"></span>
-    <NavLink to="/home/sign-in" className="logotype-content__signIn" activeClassName="is-active">
-      Sign In
-    </NavLink>
-  </div>;
+const Logotype = ({ auth, outLog, history }) => {
+  const [out, setOut] = useState(false);
 
-  const userBlock = <div className="logotype-content__user">
-    <Link to="#" className="logotype-content__personal">
-      <img src={personal} alt="personal"/>
-    </Link>
-    <Link to="/cart" className="logotype-content__cart">
-      <img src={cart} alt="cart"></img>
-    </Link>
-  </div>;
+  useEffect(() => {
+    if (!auth) {
+      history.push("/home/log-in");
+    }
+  }, [auth]);
 
-  const ViewBlock = authenticated ? userBlock : authBlock;
+  const outLogin = () => {
+    localStorage.removeItem("token");
+    outLog();
+    setOut(false);
+  };
+
+  const viewOut = out ? <OutBlock method={outLogin}/> : null;
+
+  const viewBlock = auth
+    ? <UserBlock method={() => setOut(state => !state)}/>
+    : <AuthBlock type="logotype"/>;
+
   return (
     <div className="logotype">
       <div className="container">
@@ -35,8 +38,9 @@ const Logotype = ({ authenticated }) => {
           <Link to="/" className="logotype-content__title">Logotype</Link>
           <div className="logotype-content__wrapper">
             <Link to="/products" className="logotype-content__products">Products</Link>
-            { ViewBlock }
+            { viewBlock }
           </div>
+          {viewOut}
         </div>
       </div>
     </div>
@@ -48,7 +52,12 @@ const mapStateToProps = (state) => {
 };
 
 Logotype.propTypes = {
-  authenticated: PropTypes.bool
+  auth: PropTypes.bool,
+  outLog: PropTypes.func,
+  history: PropTypes.any
 };
 
-export default connect(mapStateToProps, undefined, undefined, { pure: false })(Logotype);
+export default compose(
+  connect(mapStateToProps, actionsAthenticated, undefined, { pure: false }),
+  withRouter
+)(Logotype);

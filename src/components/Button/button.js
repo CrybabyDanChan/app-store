@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import "./button.sass";
@@ -10,84 +10,77 @@ import inc from "../../images/inc.png";
 
 const Button = (props) => {
   const {
+    type,
     text,
-    addProductsToCart,
-    editProduct,
-    addProduct,
-    deleting,
-    id,
-    actionMethod,
+    method,
+    disabled,
     additionalClass
   } = props;
 
-  const handleBtn = (event) => {
-    // event.preventDefault();
+  const handleImg = (source, alternative) => {
+    return <img src={source} alt={alternative} className="btn__img"/>;
   };
 
-  const genearetEvent = !actionMethod ? handleBtn : actionMethod;
-
-  const generateClass = `btn + ${additionalClass}`;
-
-  const defaultButton = <button
-    onClick={genearetEvent}
-    className={generateClass}>
-    {text}
-  </button>;
-
-  const addToCart = <button className="btn btn_img-flex"
-    onClick={() => actionMethod(id)}>
-    <img src={whiteCart} alt="" className="btn__img"/>
-    add to cart
-  </button>;
-
-  const addProductButton = <button className="btn btn_img-flex">
-    <img src={inc} alt="" className="btn__img"/>
-    add product
-  </button>;
-
-  const deleteButton = <button className="btn btn_img-flex btn_cancel"
-    onClick={() => actionMethod(id)}>
-    <img src={blueCart} alt="" className="btn__img"/>
-    delete
-  </button>;
-
-  const editProductButton = <button className="btn btn_img-flex">
-    <img src={create} alt="" className="btn__img"/>
-    edit product
-  </button>;
-
-  const generateButton = () => {
-    const button = (addProductsToCart) ? addToCart
-      : (addProduct) ? addProductButton
-        : (deleting) ? deleteButton
-          : (editProduct) ? editProductButton
-            : defaultButton;
-    return button;
+  const handleClass = (nameClass) => {
+    return additionalClass ? `${nameClass} ${additionalClass}` : `${nameClass}`;
   };
+
+  const generateClass = () => {
+    switch (type) {
+      case "addToCart" :
+        return handleClass("btn btn_img-flex");
+      case "addProduct" :
+        return handleClass("btn btn_img-flex");
+      case "deleting" :
+        return handleClass("btn btn_img-flex btn_cancel");
+      case "editProduct" :
+        return handleClass("btn btn_img-flex");
+      case "disabled" :
+        return handleClass("btn__disabled btn_center");
+      default:
+        return handleClass("btn");
+    }
+  };
+
+  const generateImg = () => {
+    switch (type) {
+      case "addToCart" :
+        return handleImg(whiteCart, "whiteCart");
+      case "addProduct" :
+        return handleImg(inc, "plus");
+      case "deleting" :
+        return handleImg(blueCart, "blueCart");
+      case "editProduct" :
+        return handleImg(create, "create");
+      default:
+        return null;
+    }
+  };
+
+  const generateMethod = !method ? () => {} : method;
+
   return (
-    <Fragment>
-      { generateButton() }
-    </Fragment>
+    <button
+      disabled = {disabled}
+      type="button"
+      className={generateClass()}
+      onClick={generateMethod}>
+      {generateImg()}
+      {text}
+    </button>
   );
 };
 Button.deffaultProps = {
-  addProductsToCart: false,
-  editProduct: false,
-  deleting: false,
-  addProduct: false,
-  additionalClass: null,
-  value: null,
-  actionMethod: false
+  additionalClass: "",
+  method: null,
+  disabled: false
 };
 
 Button.propTypes = {
   text: PropTypes.string,
-  addProductsToCart: PropTypes.bool,
-  editProduct: PropTypes.bool,
-  addProduct: PropTypes.bool,
-  deleting: PropTypes.bool,
-  id: PropTypes.any,
-  actionMethod: PropTypes.func,
+  type: PropTypes.string,
+  method: PropTypes.func,
+  disabled: PropTypes.bool,
   additionalClass: PropTypes.string
 };
 export default Button;

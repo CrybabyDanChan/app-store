@@ -4,14 +4,16 @@ import PropTypes from "prop-types";
 
 import "./cart.sass";
 import Item from "../Item";
-import * as Actions from "../../actions/products";
+import * as productsActions from "../../actions/productsActions";
 import Button from "../Button";
 
 const Cart = ({ arrayOfCart, clearCart }) => {
-  const placeOrder = arrayOfCart.length ? <div className="cart-wrapper__place-order">
-    <Button events text={"clear"} actionMethod = {clearCart} additionalClass={"btn_cancel"}/>
-    <Button text={"order"}/>
-  </div> : null;
+  const placeOrder = arrayOfCart.length
+    ? <div className="cart-wrapper__place-order">
+      <Button text="clear" method = {clearCart} additionalClass="btn_cancel"/>
+      <Button text="order"/>
+    </div>
+    : null;
 
   return (
     <div className="cart">
@@ -20,9 +22,7 @@ const Cart = ({ arrayOfCart, clearCart }) => {
           <div className="cart-wrapper__title">Cart</div>
           <div className="cart-wrapper__items">
             {
-              arrayOfCart.map(product => {
-                return <Item key={product.id} {...product}/>;
-              })
+              arrayOfCart.map(product => <Item key={product.id} {...product}/>)
             }
           </div>
           {placeOrder}
@@ -41,4 +41,4 @@ Cart.propTypes = {
   clearCart: PropTypes.func
 };
 
-export default connect(mapStateToProps, Actions)(Cart);
+export default connect(mapStateToProps, productsActions)(Cart);

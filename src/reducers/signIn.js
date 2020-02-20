@@ -1,34 +1,24 @@
 export const initialState = {
   login: "",
-  password: "",
-  loginError: null,
-  passwordError: null
+  password: ""
 };
 
 const signIn = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_LOGIN":
+    case "SET_REG_LOGIN":
       return {
         ...state,
         login: action.payload
       };
 
-    case "SET_PASSWORD":
+    case "SET_REG_PASSWORD":
       return {
         ...state,
         password: action.payload
       };
-
-    case "SET_PASSWORD_ERRROR":
+    case "LOAD_USER_SIGN_IN":
       return {
-        ...state,
-        passwordError: action.payload
-      };
-
-    case "SET_LOGIN_ERROR":
-      return {
-        ...state,
-        loginError: action.payload
+        ...state
       };
     default:
       return state;

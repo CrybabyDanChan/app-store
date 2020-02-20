@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import "./item.sass";
-import * as Actions from "../../actions/products";
+import * as productsActions from "../../actions/productsActions";
 import Button from "../Button";
 import Counter from "../Counter";
 
@@ -14,12 +14,18 @@ const Item = (props) => {
     avatar,
     description,
     beInCart,
-    count,
     addToCart
   } = props;
 
-  const generateBtn = beInCart ? <Button deleting id ={id} actionMethod={addToCart}/>
-    : <Button addProductsToCart id ={id} actionMethod={addToCart}/>;
+  const [count, setCount] = useState(1);
+
+  const generateBtn = beInCart
+    ? <Button type = "deleting"
+      text="delete"
+      method={() => addToCart(id)}/>
+    : <Button type = "addToCart"
+      text="add to cart"
+      method={() => addToCart(id)}/>;
 
   return (
     <div className="item">
@@ -31,7 +37,7 @@ const Item = (props) => {
             <div className="item-wrapper__text">{description}</div>
           </div>
           <div className="item-wrapper__counter">
-            <Counter/>
+            <Counter method={setCount} count={count}/>
           </div>
           {generateBtn}
         </div>
@@ -45,9 +51,8 @@ Item.propTypes = {
   name: PropTypes.string,
   avatar: PropTypes.string,
   description: PropTypes.string,
-  count: PropTypes.number,
   beInCart: PropTypes.bool,
   addToCart: PropTypes.func
 };
 
-export default connect(undefined, Actions)(Item);
+export default connect(undefined, productsActions)(Item);

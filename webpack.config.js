@@ -119,11 +119,13 @@ module.exports = (env = {}) => {
     },
 
     plugins: getPlugins(),
-
+    devtool: "eval-source-map",
     devServer: {
       contentBase: path.join(__dirname, "dist"),
       open: true,
-      historyApiFallback: true
+      historyApiFallback: true,
+      port: 8082,
+      hot: true
     }
   };
 };
