@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import "./createProducts.sass";
 import Button from "../Button";
@@ -98,6 +99,10 @@ const CreateProducts = (props) => {
       </div>
     </div>
   );
+};
+
+CreateProducts.propTypes = {
+  loadCreateProduct: PropTypes.func
 };
 
 export default connect(undefined, createProductsActions)(CreateProducts);

@@ -6,14 +6,12 @@ import { withRouter } from "react-router-dom";
 
 import compose from "../../compose";
 import "./logIn.sass";
-import validate from "../hoc/validate";
 import * as actionsLogIn from "../../actions/logInActions";
 import Button from "../Button";
+import { regExForLogin, regExForPassword } from "../../utils/regularExpresion";
 
 const LogIn = (props) => {
   const {
-    validateLogin,
-    validatePassword,
     setLoginValue,
     setPasswordValue,
     userLogIn,
@@ -33,6 +31,18 @@ const LogIn = (props) => {
     loginError: false,
     passwordError: false
   });
+
+  const validateLogin = (value) => {
+    const regEx = regExForLogin;
+    const checkLogin = regEx.test(value);
+    return checkLogin;
+  };
+
+  const validatePassword = (value) => {
+    const regEx = regExForPassword;
+    const checkPassword = regEx.test(value);
+    return checkPassword;
+  };
 
   const generateInputClass = (errorTypes, value) => {
     return classNames({
@@ -106,8 +116,6 @@ const LogIn = (props) => {
 };
 
 LogIn.propTypes = {
-  validateLogin: PropTypes.func,
-  validatePassword: PropTypes.func,
   setLoginValue: PropTypes.func,
   setPasswordValue: PropTypes.func,
   userLogIn: PropTypes.func,
@@ -121,6 +129,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, actionsLogIn),
-  validate,
   withRouter
 )(LogIn);

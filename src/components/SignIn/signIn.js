@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import compose from "../../compose";
+import { withRouter } from "react-router-dom";
 
 import "./signIn.sass";
 import validate from "../hoc/validate";
 import * as signInActions from "../../actions/signInActions";
 import Button from "../Button";
+import { regExForLogin, regExForPassword } from "../../utils/regularExpresion";
 
 const SignIn = (props) => {
   const {
-    validateLogin,
-    validatePassword,
     setRegLoginValue,
     setRegPasswordValue,
-    regUser
+    regUser,
+    auth,
+    history
   } = props;
 
   const [{ loginValue, passwordValue, loginError, passwordError }, setFormValue] = useState({
@@ -24,6 +26,24 @@ const SignIn = (props) => {
     loginError: false,
     passwordError: false
   });
+
+  useEffect(() => {
+    if (auth) {
+      history.push("/home/welcome");
+    }
+  });
+
+  const validateLogin = (value) => {
+    const regEx = regExForLogin;
+    const checkLogin = regEx.test(value);
+    return checkLogin;
+  };
+
+  const validatePassword = (value) => {
+    const regEx = regExForPassword;
+    const checkPassword = regEx.test(value);
+    return checkPassword;
+  };
 
   const generateInputClass = (errorTypes, key) => {
     return classNames({
@@ -35,8 +55,7 @@ const SignIn = (props) => {
 
   const generateBtn = !(!passwordError && !loginError && loginValue !== "" && passwordValue !== "");
 
-  const registerUser = (event) => {
-    event.preventDefault();
+  const registrationOfUsers = () => {
     regUser();
     setFormValue({
       loginValue: "",
@@ -80,7 +99,7 @@ const SignIn = (props) => {
     <div className="sign-in">
       <div className="sign-in-form">
         <h1 className="sign-in-form__title">Sign In</h1>
-        <form className="sign-in-form__form" onSubmit={registerUser}>
+        <div className="sign-in-form__form">
           <label className="sign-in-form__label">
             Login / Email address
             <input type="text"
@@ -102,8 +121,10 @@ const SignIn = (props) => {
           <Button text="sign in"
             type = {generateBtn ? "disabled" : null}
             additionalClass="btn_center"
-            disabled={generateBtn}/>
-        </form>
+            disabled={generateBtn}
+            method={registrationOfUsers}
+          />
+        </div>
       </div>
     </div>
   );
@@ -113,7 +134,9 @@ SignIn.propTypes = {
   validatePassword: PropTypes.func,
   setRegLoginValue: PropTypes.func,
   setRegPasswordValue: PropTypes.func,
-  regUser: PropTypes.func
+  regUser: PropTypes.func,
+  auth: PropTypes.bool,
+  history: PropTypes.any
 };
 
 const mapStateToProps = (state) => {
@@ -122,5 +145,6 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, signInActions),
+  withRouter,
   validate
 )(SignIn);
