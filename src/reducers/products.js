@@ -44,6 +44,11 @@ const products = (state = initialState, action) => {
         ...state,
         arrayOfCart: newArrayOfCartClear
       };
+    case "SET_PRODUCTS":
+      return {
+        ...state,
+        arrayOfAllProducts: action.payload
+      };
     default:
       return state;
   }

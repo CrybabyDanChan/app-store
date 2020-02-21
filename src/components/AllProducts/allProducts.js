@@ -10,7 +10,7 @@ const AllProducts = (props) => {
 
   useEffect(() => {
     loadAllProducts();
-  }, [arrayOfAllProducts]);
+  }, [props]);
 
   return (
     <div className="all-products">

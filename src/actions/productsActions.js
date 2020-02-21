@@ -16,8 +16,16 @@ const loadAllProducts = () => {
   };
 };
 
+const setProducts = (products) => {
+  return {
+    type: "SET_PRODUCTS",
+    payload: products
+  };
+};
+
 export {
   addToCart,
   clearCart,
-  loadAllProducts
+  loadAllProducts,
+  setProducts
 };
