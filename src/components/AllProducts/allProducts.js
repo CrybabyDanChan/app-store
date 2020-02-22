@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, useMemo } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -10,11 +10,13 @@ const AllProducts = (props) => {
 
   useEffect(() => {
     loadAllProducts();
-  }, [props]);
+  }, []);
 
   return (
     <div className="all-products">
-      {arrayOfAllProducts.map(product => <Item key={product.id} {...product}/>)}
+      {arrayOfAllProducts.map(
+        product => <Item key={product.id} {...product}/>
+      )}
     </div>
   );
 };

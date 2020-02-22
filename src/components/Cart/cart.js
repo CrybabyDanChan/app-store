@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -7,7 +7,11 @@ import Item from "../Item";
 import * as productsActions from "../../actions/productsActions";
 import Button from "../Button";
 
-const Cart = ({ arrayOfCart, clearCart }) => {
+const Cart = ({ arrayOfCart, clearCart, loadProductsFromCart }) => {
+  useEffect(() => {
+    loadProductsFromCart();
+  }, []);
+
   const placeOrder = arrayOfCart.length
     ? <div className="cart-wrapper__place-order">
       <Button text="clear" method = {clearCart} additionalClass="btn_cancel"/>

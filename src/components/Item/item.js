@@ -14,7 +14,7 @@ const Item = (props) => {
     avatar,
     description,
     beInCart,
-    addToCart
+    loadAddToCart
   } = props;
 
   const [count, setCount] = useState(1);
@@ -22,10 +22,10 @@ const Item = (props) => {
   const generateBtn = beInCart
     ? <Button type = "deleting"
       text="delete"
-      method={() => addToCart(id)}/>
+      method={() => {}}/>
     : <Button type = "addToCart"
       text="add to cart"
-      method={() => addToCart(id)}/>;
+      method={() => loadAddToCart(id)}/>;
 
   return (
     <div className="item">
@@ -52,7 +52,7 @@ Item.propTypes = {
   avatar: PropTypes.string,
   description: PropTypes.string,
   beInCart: PropTypes.bool,
-  addToCart: PropTypes.func
+  loadAddToCart: PropTypes.func
 };
 
 export default connect(undefined, productsActions)(Item);

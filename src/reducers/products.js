@@ -1,15 +1,9 @@
 /* eslint-disable no-case-declarations */
 export const initialState = {
-  arrayOfAllProducts: [
-    {
-      id: 1,
-      name: "Iphone 10",
-      avatar: "https://izone.pl/21526-large_default/apple-iphone-11-zielony-64gb.jpg",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus, impedit."
-    }
-  ],
+  arrayOfAllProducts: [],
   arrayOfMyProducts: [],
-  arrayOfCart: []
+  arrayOfCart: [],
+  idForTranseferringToCart: null
 };
 
 const products = (state = initialState, action) => {
@@ -18,17 +12,31 @@ const products = (state = initialState, action) => {
       return {
         ...state
       };
-    case "ADD_TO_CART":
-      let newArrayOfCart = state.arrayOfCart.concat();
-      const newArrayOfAllProducts = state.arrayOfAllProducts.concat();
-      const id = action.payload;
-      const product = newArrayOfAllProducts.find(p => p.id === id);
-      product.beInCart = !product.beInCart;
-      newArrayOfCart.push(product);
-      newArrayOfCart = newArrayOfCart.filter(product => product.beInCart);
+
+    case "LOAD_ADD_PRODUCT_TO_CART":
       return {
         ...state,
-        arrayOfCart: newArrayOfCart,
+        idForTranseferringToCart: action.payload
+      };
+
+    case "LOAD_PRODUCTS_FROM_CART":
+      return {
+        ...state
+      };
+
+    case "SET_PRODUCTS_FROM_CART":
+      console.log(action.payload);
+      return {
+        ...state,
+        arrayOfCart: action.payload
+      };
+
+    case "ADD_TO_CART":
+      const newArrayOfAllProducts = state.arrayOfAllProducts.concat();
+      const product = newArrayOfAllProducts.find(product => product.id === state.idForTranseferringToCart);
+      product.beInCart = true;
+      return {
+        ...state,
         arrayOfAllProducts: newArrayOfAllProducts
       };
 
@@ -44,11 +52,13 @@ const products = (state = initialState, action) => {
         ...state,
         arrayOfCart: newArrayOfCartClear
       };
+
     case "SET_PRODUCTS":
       return {
         ...state,
         arrayOfAllProducts: action.payload
       };
+
     default:
       return state;
   }

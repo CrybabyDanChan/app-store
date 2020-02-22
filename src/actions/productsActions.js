@@ -1,7 +1,6 @@
-const addToCart = (id) => {
+const addToCart = () => {
   return {
-    type: "ADD_TO_CART",
-    payload: id
+    type: "ADD_TO_CART"
   };
 };
 const clearCart = () => {
@@ -23,9 +22,31 @@ const setProducts = (products) => {
   };
 };
 
+const loadAddToCart = (id) => {
+  return {
+    type: "LOAD_ADD_PRODUCT_TO_CART",
+    payload: id
+  };
+};
+
+const loadProductsFromCart = () => {
+  return {
+    type: "LOAD_PRODUCTS_FROM_CART"
+  };
+};
+
+const setProductsFromCart = (data) => {
+  return {
+    type: "SET_PRODUCTS_FROM_CART",
+    payload: data
+  };
+};
 export {
   addToCart,
   clearCart,
   loadAllProducts,
-  setProducts
+  setProducts,
+  loadAddToCart,
+  loadProductsFromCart,
+  setProductsFromCart
 };
