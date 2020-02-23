@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import "./item.sass";
 import * as productsActions from "../../actions/productsActions";
@@ -24,11 +25,12 @@ const Item = (props) => {
   const generateBtn = beInCart
     ? <Button type = "deleting"
       text="delete"
-      method={() => {}}/>
-    : (userId === authId)
-      ? <Button type = "editProduct"
-        text="edit product"
-        method={() => loadAddToCart(id)}/>
+      method={() => {}}/> : (userId === authId)
+      ? <Link to={`/edit-products/${id}`}
+        className="item-wrapper_link">
+        <Button type = "editProduct"
+          text="edit product"/>
+      </Link>
       : <Button type = "addToCart"
         text="add to cart"
         method={() => loadAddToCart(id)}/>;

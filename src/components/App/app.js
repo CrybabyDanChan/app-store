@@ -45,6 +45,13 @@ function App (props) {
             render={() => {
               return <CreateProduct/>;
             }}/>
+          <Route
+            exact
+            path="/edit-products/:id"
+            render={({ match }) => {
+              const id = match.params.id;
+              return <CreateProduct id={id}/>;
+            }}/>
           <Redirect from='/' to="/home"/>
         </Switch>
       </div>

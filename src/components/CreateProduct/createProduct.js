@@ -9,7 +9,7 @@ import * as createProductsActions from "../../actions/createProductsActions";
 import InputImage from "../InputImage";
 
 const CreateProduct = (props) => {
-  const { loadCreateProduct } = props;
+  const { loadCreateProduct, id } = props;
   const [{ urlImg, valueTitle, valueDescription, imgFile }, setForm] = useState({
     urlImg: null,
     imgFile: null,
@@ -62,7 +62,7 @@ const CreateProduct = (props) => {
     <div className="create-products">
       <div className="container">
         <div className="create-products-wrapper">
-          <div className="create-products-wrapper__title">Create</div>
+          <div className="create-products-wrapper__title">{ id ? "Edit Products" : "Create"}</div>
           <div className="create-products-wrapper__items">
             <div className="create-products-wrapper__form" name="createProduct">
               <div className="create-products-wrapper__input-wrapper">
@@ -103,7 +103,12 @@ const CreateProduct = (props) => {
 };
 
 CreateProduct.propTypes = {
-  loadCreateProduct: PropTypes.func
+  loadCreateProduct: PropTypes.func,
+  id: PropTypes.any
+};
+
+CreateProduct.defaultProps = {
+  id: null
 };
 
 export default connect(undefined, createProductsActions)(CreateProduct);
