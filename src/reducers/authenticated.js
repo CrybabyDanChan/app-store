@@ -1,4 +1,5 @@
 export const initialState = {
+  id: "",
   userName: "",
   auth: false,
   error: false
@@ -6,10 +7,11 @@ export const initialState = {
 
 const authenticated = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_USER_NAME":
+    case "SET_USER":
       return {
         ...state,
-        userName: action.payload,
+        userName: action.payload.username,
+        id: action.payload.id,
         auth: true
       };
 

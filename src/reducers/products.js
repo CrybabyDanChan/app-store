@@ -25,10 +25,19 @@ const products = (state = initialState, action) => {
       };
 
     case "SET_PRODUCTS_FROM_CART":
-      console.log(action.payload);
       return {
         ...state,
         arrayOfCart: action.payload
+      };
+
+    case "SET_PRODUCTS_FROM_MY":
+      const userId = action.payload;
+      const newArrayOfMyProducts = state.arrayOfAllProducts.filter(
+        product => product.userId === userId
+      );
+      return {
+        ...state,
+        arrayOfMyProducts: newArrayOfMyProducts
       };
 
     case "ADD_TO_CART":

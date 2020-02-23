@@ -1,5 +1,5 @@
 import { takeEvery, call, put, select } from "redux-saga/effects";
-import { setTokenAndUserName, setErrorAuth } from "../actions/authenticatedActions";
+import { setTokenAndUser, setErrorAuth } from "../actions/authenticatedActions";
 import { getLogIn } from "./selectors";
 
 const fetchData = (userData) => {
@@ -21,9 +21,9 @@ const fetchData = (userData) => {
 
 function * workerLoadData () {
   const userData = yield select(getLogIn);
-  const { username, token, error } = yield call(fetchData, userData);
+  const { username, id, token, error } = yield call(fetchData, userData);
   if (username && token) {
-    yield put(setTokenAndUserName(username));
+    yield put(setTokenAndUser({ username, id }));
     localStorage.setItem("token", token);
   } else {
     yield put(setErrorAuth(error));

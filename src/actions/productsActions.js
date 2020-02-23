@@ -22,6 +22,13 @@ const setProducts = (products) => {
   };
 };
 
+const setMyProducts = (userId) => {
+  return {
+    type: "SET_PRODUCTS_FROM_MY",
+    payload: userId
+  };
+};
+
 const loadAddToCart = (id) => {
   return {
     type: "LOAD_ADD_PRODUCT_TO_CART",
@@ -48,5 +55,6 @@ export {
   setProducts,
   loadAddToCart,
   loadProductsFromCart,
-  setProductsFromCart
+  setProductsFromCart,
+  setMyProducts
 };

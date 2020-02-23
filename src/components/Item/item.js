@@ -14,7 +14,9 @@ const Item = (props) => {
     avatar,
     description,
     beInCart,
-    loadAddToCart
+    loadAddToCart,
+    userId,
+    authId
   } = props;
 
   const [count, setCount] = useState(1);
@@ -23,9 +25,13 @@ const Item = (props) => {
     ? <Button type = "deleting"
       text="delete"
       method={() => {}}/>
-    : <Button type = "addToCart"
-      text="add to cart"
-      method={() => loadAddToCart(id)}/>;
+    : (userId === authId)
+      ? <Button type = "editProduct"
+        text="edit product"
+        method={() => loadAddToCart(id)}/>
+      : <Button type = "addToCart"
+        text="add to cart"
+        method={() => loadAddToCart(id)}/>;
 
   return (
     <div className="item">
@@ -52,7 +58,15 @@ Item.propTypes = {
   avatar: PropTypes.string,
   description: PropTypes.string,
   beInCart: PropTypes.bool,
-  loadAddToCart: PropTypes.func
+  loadAddToCart: PropTypes.func,
+  userId: PropTypes.any,
+  authId: PropTypes.any
 };
 
-export default connect(undefined, productsActions)(Item);
+const mapStateToProps = (state) => {
+  return {
+    authId: state.authenticated.id
+  };
+};
+
+export default connect(mapStateToProps, productsActions)(Item);
