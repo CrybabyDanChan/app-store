@@ -6,7 +6,6 @@ import compose from "../../compose";
 import { withRouter } from "react-router-dom";
 
 import "./signIn.sass";
-import validate from "../hoc/validate";
 import * as signInActions from "../../actions/signInActions";
 import Button from "../Button";
 import { regExForLogin, regExForPassword } from "../../utils/regularExpresion";
@@ -146,5 +145,4 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps, signInActions),
   withRouter,
-  validate
 )(SignIn);

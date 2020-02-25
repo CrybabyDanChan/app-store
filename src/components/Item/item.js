@@ -16,6 +16,7 @@ const Item = (props) => {
     description,
     beInCart,
     loadAddToCart,
+    loadRemoveFromCart,
     userId,
     authId
   } = props;
@@ -25,7 +26,7 @@ const Item = (props) => {
   const generateBtn = beInCart
     ? <Button type = "deleting"
       text="delete"
-      method={() => {}}/> : (userId === authId)
+      method={() => loadRemoveFromCart(id)}/> : (userId === authId)
       ? <Link to={`/edit-products/${id}`}
         className="item-wrapper_link">
         <Button type = "editProduct"
@@ -61,6 +62,7 @@ Item.propTypes = {
   description: PropTypes.string,
   beInCart: PropTypes.bool,
   loadAddToCart: PropTypes.func,
+  loadRemoveFromCart: PropTypes.func,
   userId: PropTypes.any,
   authId: PropTypes.any
 };

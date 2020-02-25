@@ -3,6 +3,13 @@ const addToCart = () => {
     type: "ADD_TO_CART"
   };
 };
+
+const removeFromCart = () => {
+  return {
+    type: "REMOVE_FROM_CART"
+  };
+};
+
 const clearCart = () => {
   return {
     type: "CLEAR_CART"
@@ -36,6 +43,13 @@ const loadAddToCart = (id) => {
   };
 };
 
+const loadRemoveFromCart = (id) => {
+  return {
+    type: "LOAD_REMOVE_PRODUCT_TO_CART",
+    payload: id
+  };
+};
+
 const loadProductsFromCart = () => {
   return {
     type: "LOAD_PRODUCTS_FROM_CART"
@@ -56,5 +70,7 @@ export {
   loadAddToCart,
   loadProductsFromCart,
   setProductsFromCart,
-  setMyProducts
+  setMyProducts,
+  loadRemoveFromCart,
+  removeFromCart
 };

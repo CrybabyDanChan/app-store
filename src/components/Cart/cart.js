@@ -42,7 +42,8 @@ const mapStateToProps = (state) => {
 
 Cart.propTypes = {
   arrayOfCart: PropTypes.arrayOf(PropTypes.object),
-  clearCart: PropTypes.func
+  clearCart: PropTypes.func,
+  loadProductsFromCart: PropTypes.func
 };
 
 export default connect(mapStateToProps, productsActions)(Cart);

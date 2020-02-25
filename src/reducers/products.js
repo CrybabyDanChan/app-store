@@ -3,7 +3,8 @@ export const initialState = {
   arrayOfAllProducts: [],
   arrayOfMyProducts: [],
   arrayOfCart: [],
-  idForTranseferringToCart: null
+  idForTranseferring: null,
+  idForRemove: null
 };
 
 const products = (state = initialState, action) => {
@@ -16,9 +17,14 @@ const products = (state = initialState, action) => {
     case "LOAD_ADD_PRODUCT_TO_CART":
       return {
         ...state,
-        idForTranseferringToCart: action.payload
+        idForTranseferring: action.payload
       };
 
+    case "LOAD_REMOVE_PRODUCT_TO_CART":
+      return {
+        ...state,
+        idForRemove: action.payload
+      };
     case "LOAD_PRODUCTS_FROM_CART":
       return {
         ...state
@@ -41,12 +47,31 @@ const products = (state = initialState, action) => {
       };
 
     case "ADD_TO_CART":
-      const newArrayOfAllProducts = state.arrayOfAllProducts.concat();
-      const product = newArrayOfAllProducts.find(product => product.id === state.idForTranseferringToCart);
-      product.beInCart = true;
+      const allProductsForAdd = state.arrayOfAllProducts.concat();
+      const productAdd = allProductsForAdd.find(
+        product => product.id === state.idForTranseferring
+      );
+      productAdd.beInCart = true;
       return {
         ...state,
-        arrayOfAllProducts: newArrayOfAllProducts
+        arrayOfAllProducts: allProductsForAdd,
+        idForTranseferring: null
+      };
+
+    case "REMOVE_FROM_CART":
+      const allProductsForRemove = state.arrayOfAllProducts.concat();
+      const newArrayOfCart = state.arrayOfCart.filter(
+        product => product.id !== state.idForRemove
+      );
+      const productDel = allProductsForRemove.find(
+        product => product.id === state.idForRemove
+      );
+      productDel.beInCart = false;
+      return {
+        ...state,
+        arrayOfAllProducts: allProductsForRemove,
+        arrayOfCart: newArrayOfCart,
+        idForRemove: null
       };
 
     case "CLEAR_CART" :

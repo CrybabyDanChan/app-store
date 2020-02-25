@@ -21,9 +21,9 @@ const fetchData = (userData) => {
 
 function * workerLoadData () {
   const userData = yield select(getLogIn);
-  const { username, id, token, error } = yield call(fetchData, userData);
+  const { username, id, token, error, cartId } = yield call(fetchData, userData);
   if (username && token) {
-    yield put(setTokenAndUser({ username, id }));
+    yield put(setTokenAndUser({ username, id, cartId }));
     localStorage.setItem("token", token);
   } else {
     yield put(setErrorAuth(error));
