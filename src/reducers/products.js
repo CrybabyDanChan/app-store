@@ -3,8 +3,9 @@ export const initialState = {
   arrayOfAllProducts: [],
   arrayOfMyProducts: [],
   arrayOfCart: [],
-  idForTranseferring: null,
-  idForRemove: null
+  valueForm: null,
+  checkProducts: false,
+  productIdToChange: null
 };
 
 const products = (state = initialState, action) => {
@@ -14,83 +15,64 @@ const products = (state = initialState, action) => {
         ...state
       };
 
-    case "LOAD_ADD_PRODUCT_TO_CART":
+    case "ADD_ALL_PRODUCTS":
+      const newProducts = action.payload;
+      const myProducts = newProducts.filter(product => product.ownedByUser);
+      const productsToCart = newProducts.filter(product => product.beInCart);
       return {
         ...state,
-        idForTranseferring: action.payload
+        arrayOfAllProducts: newProducts,
+        arrayOfMyProducts: myProducts,
+        arrayOfCart: productsToCart,
+        checkProducts: true
       };
 
-    case "LOAD_REMOVE_PRODUCT_TO_CART":
+    case "LOAD_CREATE_PRODUCT":
       return {
         ...state,
-        idForRemove: action.payload
-      };
-    case "LOAD_PRODUCTS_FROM_CART":
-      return {
-        ...state
+        valueForm: action.payload
       };
 
-    case "SET_PRODUCTS_FROM_CART":
+    case "ADD_PRODUCT":
+      const newProduct = action.payload;
+      const newArrayOfProducts = state.arrayOfAllProducts.concat();
+      const newArrayOfMyProducts = state.arrayOfMyProducts.concat();
+      newArrayOfProducts.push(newProduct);
+      newArrayOfMyProducts.push(newProduct);
       return {
         ...state,
-        arrayOfCart: action.payload
+        arrayOfAllProducts: newArrayOfProducts,
+        arrayOfMyProducts: newArrayOfMyProducts,
+        valueForm: null
       };
 
-    case "SET_PRODUCTS_FROM_MY":
-      const userId = action.payload;
-      const newArrayOfMyProducts = state.arrayOfAllProducts.filter(
-        product => product.userId === userId
-      );
+    case "LOAD_EDIT_PRODUCT":
       return {
         ...state,
-        arrayOfMyProducts: newArrayOfMyProducts
+        productIdToChange: action.payload.productId,
+        valueForm: action.payload.valueForm
       };
 
-    case "ADD_TO_CART":
-      const allProductsForAdd = state.arrayOfAllProducts.concat();
-      const productAdd = allProductsForAdd.find(
-        product => product.id === state.idForTranseferring
-      );
-      productAdd.beInCart = true;
+    case "EDIT_PRODUCT":
+      const updateProduct = action.payload;
+      const newAllProducts = state.arrayOfAllProducts.concat();
+      const newMyProducts = state.arrayOfMyProducts.concat();
+      const indexProductInMy = newMyProducts.findIndex(product => product.id === updateProduct.id);
+      const indexProductInALl = newAllProducts.findIndex(product => product.id === updateProduct.id);
+      newAllProducts[indexProductInALl] = updateProduct;
+      newMyProducts[indexProductInMy] = updateProduct;
       return {
         ...state,
-        arrayOfAllProducts: allProductsForAdd,
-        idForTranseferring: null
+        arrayOfAllProducts: newAllProducts,
+        arrayOfMyProducts: newMyProducts,
+        productIdToChange: null,
+        valueForm: null
       };
 
-    case "REMOVE_FROM_CART":
-      const allProductsForRemove = state.arrayOfAllProducts.concat();
-      const newArrayOfCart = state.arrayOfCart.filter(
-        product => product.id !== state.idForRemove
-      );
-      const productDel = allProductsForRemove.find(
-        product => product.id === state.idForRemove
-      );
-      productDel.beInCart = false;
+    case "USER_HAS_CHANGED":
       return {
         ...state,
-        arrayOfAllProducts: allProductsForRemove,
-        arrayOfCart: newArrayOfCart,
-        idForRemove: null
-      };
-
-    case "CLEAR_CART" :
-      const newArrayOfCartClear = state.arrayOfCart
-        .concat()
-        .map(product => {
-          product.beInCart = false;
-          return product;
-        })
-        .filter(product => product.beInCart);
-      return {
-        ...state,
-        arrayOfCart: newArrayOfCartClear
-      };
-
-    case "SET_PRODUCTS":
-      return {
-        ...state,
-        arrayOfAllProducts: action.payload
+        checkProducts: false
       };
 
     default:

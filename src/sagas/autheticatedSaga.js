@@ -15,9 +15,9 @@ const fetchData = () => {
 };
 
 function * workerLoadData () {
-  const { username, userId, error, cartId } = yield call(fetchData);
+  const { username, userId, error } = yield call(fetchData);
   if (username) {
-    yield put(setTokenAndUser({ username, id: userId, cartId }));
+    yield put(setTokenAndUser({ username, id: userId }));
   } else {
     yield put(setErrorAuth(error));
   }

@@ -17,14 +17,23 @@ const logAuth = () => {
     type: "LOAD_AUTH"
   };
 };
+
 const outLog = () => {
   return {
     type: "OUT_LOGIN"
   };
 };
+
+const userHasChanged = () => {
+  return {
+    type: "USER_HAS_CHANGED"
+  };
+};
+
 export {
   setTokenAndUser,
   setErrorAuth,
   logAuth,
-  outLog
+  outLog,
+  userHasChanged
 };

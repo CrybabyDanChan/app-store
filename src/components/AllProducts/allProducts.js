@@ -1,16 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import Item from "../Item";
-import * as productsActions from "../../actions/productsActions";
 
 const AllProducts = (props) => {
-  const { arrayOfAllProducts, loadAllProducts } = props;
-
-  useEffect(() => {
-    loadAllProducts();
-  }, []);
+  const { arrayOfAllProducts } = props;
 
   return (
     <div className="all-products">
@@ -26,8 +21,7 @@ const mapStateToProps = (state) => {
 };
 
 AllProducts.propTypes = {
-  arrayOfAllProducts: PropTypes.arrayOf(PropTypes.object),
-  loadAllProducts: PropTypes.func
+  arrayOfAllProducts: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default connect(mapStateToProps, productsActions)(AllProducts);
+export default connect(mapStateToProps)(AllProducts);

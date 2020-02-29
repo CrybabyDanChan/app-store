@@ -1,20 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import "./cart.sass";
 import Item from "../Item";
-import * as productsActions from "../../actions/productsActions";
 import Button from "../Button";
 
-const Cart = ({ arrayOfCart, clearCart, loadProductsFromCart }) => {
-  useEffect(() => {
-    loadProductsFromCart();
-  }, []);
-
+const Cart = ({ arrayOfCart }) => {
   const placeOrder = arrayOfCart.length
     ? <div className="cart-wrapper__place-order">
-      <Button text="clear" method = {clearCart} additionalClass="btn_cancel"/>
+      <Button text="clear" method = {() => {}} additionalClass="btn_cancel"/>
       <Button text="order"/>
     </div>
     : null;
@@ -41,9 +36,7 @@ const mapStateToProps = (state) => {
 };
 
 Cart.propTypes = {
-  arrayOfCart: PropTypes.arrayOf(PropTypes.object),
-  clearCart: PropTypes.func,
-  loadProductsFromCart: PropTypes.func
+  arrayOfCart: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default connect(mapStateToProps, productsActions)(Cart);
+export default connect(mapStateToProps)(Cart);

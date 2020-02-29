@@ -1,76 +1,49 @@
-const addToCart = () => {
-  return {
-    type: "ADD_TO_CART"
-  };
-};
-
-const removeFromCart = () => {
-  return {
-    type: "REMOVE_FROM_CART"
-  };
-};
-
-const clearCart = () => {
-  return {
-    type: "CLEAR_CART"
-  };
-};
-
 const loadAllProducts = () => {
   return {
     type: "LOAD_ALL_PRODUCTS"
   };
 };
 
-const setProducts = (products) => {
+const addAllProducts = (products) => {
   return {
-    type: "SET_PRODUCTS",
+    type: "ADD_ALL_PRODUCTS",
     payload: products
   };
 };
 
-const setMyProducts = (userId) => {
+const loadCreateProduct = (valueForm) => {
   return {
-    type: "SET_PRODUCTS_FROM_MY",
-    payload: userId
+    type: "LOAD_CREATE_PRODUCT",
+    payload: valueForm
   };
 };
 
-const loadAddToCart = (id) => {
+const addProduct = (product) => {
   return {
-    type: "LOAD_ADD_PRODUCT_TO_CART",
-    payload: id
+    type: "ADD_PRODUCT",
+    payload: product
   };
 };
 
-const loadRemoveFromCart = (id) => {
+const loadEditProduct = (productId, valueForm) => {
   return {
-    type: "LOAD_REMOVE_PRODUCT_TO_CART",
-    payload: id
+    type: "LOAD_EDIT_PRODUCT",
+    payload: { productId, valueForm }
   };
 };
 
-const loadProductsFromCart = () => {
+const editProduct = (updateProduct) => {
   return {
-    type: "LOAD_PRODUCTS_FROM_CART"
+    type: "EDIT_PRODUCT",
+    payload: updateProduct
   };
 };
 
-const setProductsFromCart = (data) => {
-  return {
-    type: "SET_PRODUCTS_FROM_CART",
-    payload: data
-  };
-};
 export {
-  addToCart,
-  clearCart,
   loadAllProducts,
-  setProducts,
-  loadAddToCart,
-  loadProductsFromCart,
-  setProductsFromCart,
-  setMyProducts,
-  loadRemoveFromCart,
-  removeFromCart
+  addAllProducts,
+  loadCreateProduct,
+  addProduct,
+  loadEditProduct,
+  editProduct
 };

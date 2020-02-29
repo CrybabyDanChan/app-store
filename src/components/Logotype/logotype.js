@@ -10,7 +10,7 @@ import AuthBlock from "../AuthBlock";
 import UserBlock from "../UserBlock";
 import OutBlock from "../OutBlock";
 
-const Logotype = ({ auth, outLog, history }) => {
+const Logotype = ({ auth, outLog, history, userHasChanged }) => {
   const [out, setOut] = useState(false);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ const Logotype = ({ auth, outLog, history }) => {
 
   const outLogin = () => {
     localStorage.removeItem("token");
+    userHasChanged();
     outLog();
     setOut(false);
   };
@@ -54,7 +55,8 @@ const mapStateToProps = (state) => {
 Logotype.propTypes = {
   auth: PropTypes.bool,
   outLog: PropTypes.func,
-  history: PropTypes.any
+  history: PropTypes.any,
+  userHasChanged: PropTypes.func
 };
 
 export default compose(

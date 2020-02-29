@@ -3,6 +3,7 @@ import Normalize from "react-normalize";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 
 import "./app.sass";
 import Home from "../Page/Home";
@@ -11,13 +12,20 @@ import Logotype from "../Logotype";
 import Cart from "../Cart/cart";
 import CreateProduct from "../CreateProduct";
 import * as authenticatedActions from "../../actions/authenticatedActions";
+import * as productsActions from "../../actions/productsActions";
 
 function App (props) {
-  const { logAuth } = props;
+  const { logAuth, loadAllProducts, checkProducts, userId } = props;
 
   useEffect(() => {
     logAuth();
   }, []);
+
+  useEffect(() => {
+    if (!checkProducts) {
+      loadAllProducts();
+    }
+  }, [userId]);
 
   return (
     <Fragment>
@@ -60,7 +68,26 @@ function App (props) {
 }
 
 App.propTypes = {
-  logAuth: PropTypes.func
+  logAuth: PropTypes.func,
+  loadAllProducts: PropTypes.func,
+  checkProducts: PropTypes.bool,
+  userId: PropTypes.any
 };
 
-export default connect(undefined, authenticatedActions, undefined, { pure: false })(App);
+const mapStateToProps = (state) => {
+  return {
+    checkProducts: state.products.checkProducts,
+    userId: state.authenticated.userId
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  const { logAuth } = bindActionCreators(authenticatedActions, dispatch);
+  const { loadAllProducts } = bindActionCreators(productsActions, dispatch);
+  return {
+    logAuth,
+    loadAllProducts
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, undefined, { pure: false })(App);

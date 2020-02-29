@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -7,30 +7,18 @@ import * as productsActions from "../../actions/productsActions";
 
 const MyProducts = (props) => {
   const {
-    arrayOfMyProducts,
-    setMyProducts,
-    authId
+    arrayOfMyProducts
   } = props;
-
-  useEffect(() => {
-    setMyProducts(authId);
-  }, []);
 
   return (
     <div className="myProducts">
-      {arrayOfMyProducts.map(product => {
-        return <Item key={product.id} {...product}/>;
-      }
-      )}
+      {arrayOfMyProducts.map(product => <Item key={product.id} {...product}/>)}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  return {
-    ...state.products,
-    authId: state.authenticated.id
-  };
+  return state.products;
 };
 
 MyProducts.propTypes = {

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 
 import "./item.sass";
-import * as productsActions from "../../actions/productsActions";
+import * as cartActions from "../../actions/cartAction";
 import Button from "../Button";
 import Counter from "../Counter";
 
@@ -14,27 +15,29 @@ const Item = (props) => {
     name,
     avatar,
     description,
-    beInCart,
+    ownedByUser,
     loadAddToCart,
-    loadRemoveFromCart,
-    userId,
-    authId
+    beInCart,
+    numberInOrder,
+    userId
   } = props;
 
   const [count, setCount] = useState(1);
 
-  const generateBtn = beInCart
-    ? <Button type = "deleting"
-      text="delete"
-      method={() => loadRemoveFromCart(id)}/> : (userId === authId)
-      ? <Link to={`/edit-products/${id}`}
-        className="item-wrapper_link">
-        <Button type = "editProduct"
-          text="edit product"/>
-      </Link>
-      : <Button type = "addToCart"
+  const generateBtn = (ownedByUser)
+    ? <Link to={`/edit-products/${id}`}
+      className="item-wrapper_link">
+      <Button type = "editProduct"
+        text="edit product"/>
+    </Link>
+    : (beInCart)
+      ? <Button type = "deleting"
+        text="delete"
+        method={() => loadAddToCart({ id, count })}/>
+      : <Button disabled={!userId}
+        type = {userId ? "addToCart" : "disabled"}
         text="add to cart"
-        method={() => loadAddToCart(id)}/>;
+        method={() => loadAddToCart({ id, count })}/>;
 
   return (
     <div className="item">
@@ -46,7 +49,11 @@ const Item = (props) => {
             <div className="item-wrapper__text">{description}</div>
           </div>
           <div className="item-wrapper__counter">
-            <Counter method={setCount} count={count}/>
+            {
+              !ownedByUser && userId
+                ? <Counter method={setCount} count={beInCart ? numberInOrder : count}/>
+                : null
+            }
           </div>
           {generateBtn}
         </div>
@@ -60,17 +67,24 @@ Item.propTypes = {
   name: PropTypes.string,
   avatar: PropTypes.string,
   description: PropTypes.string,
-  beInCart: PropTypes.bool,
+  ownedByUser: PropTypes.bool,
   loadAddToCart: PropTypes.func,
-  loadRemoveFromCart: PropTypes.func,
-  userId: PropTypes.any,
-  authId: PropTypes.any
+  beInCart: PropTypes.bool,
+  numberInOrder: PropTypes.any,
+  userId: PropTypes.any
 };
 
 const mapStateToProps = (state) => {
   return {
-    authId: state.authenticated.id
+    userId: state.authenticated.userId
   };
 };
 
-export default connect(mapStateToProps, productsActions)(Item);
+const mapDispatchToProps = (dispatch) => {
+  const { loadAddToCart } = bindActionCreators(cartActions, dispatch);
+  return {
+    loadAddToCart
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

@@ -1,10 +1,26 @@
 import { takeEvery, call, put, select } from "redux-saga/effects";
 
-import { setProducts, addToCart, setProductsFromCart, removeFromCart } from "../actions/productsActions";
-import { idAdd, cartId, idRemove } from "./selectors";
+import { addAllProducts, addProduct, editProduct } from "../actions/productsActions";
+import { userHasChanged } from "../actions/authenticatedActions";
+import { mainUrl } from "../utils/url";
+import { valueForm, userId, productIdToChange } from "./selectors";
+
+const checkProduct = (product, userId, cartInfo) => {
+  product.numberInOrder = 1;
+  product.beInCart = false;
+  product.avatar = `${mainUrl}image?file=${product.avatar}`;
+  product.ownedByUser = false;
+  if (product.userId === userId) {
+    product.ownedByUser = true;
+  }
+  if (cartInfo) {
+    product.numberInOrder = cartInfo.numberOfProduct;
+    product.beInCart = true;
+  }
+};
 
 const fetchAllProducts = () => {
-  const url = "http://localhost:3000/products";
+  const url = `${mainUrl}products`;
   const token = localStorage.token;
   return fetch(url, {
     headers: {
@@ -13,98 +29,84 @@ const fetchAllProducts = () => {
   }).then(res => res.json());
 };
 
-const fetchImage = async (imgName) => {
-  const url = `http://localhost:3000/products/download?file=${imgName}`;
-  const fetchData = await fetch(url);
-  return fetchData;
-};
-
-const sendProductToCart = (id) => {
-  const url = "http://localhost:3000/products/add-to-cart";
-  const token = localStorage.token;
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({ id })
-  });
-};
-
-const removeProductToCart = (id) => {
-  const url = "http://localhost:3000/products/remove-from-cart";
-  const token = localStorage.token;
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({ id })
-  });
-};
-
-const fetchProductsFromUsersCart = () => {
-  const url = "http://localhost:3000/products/from-users-cart";
+const fetchProductsFromCart = () => {
+  const url = `${mainUrl}cart`;
   const token = localStorage.token;
   return fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }).then(res => res.json());
-};
-
-const getAllProducts = (imageItems) => {
-  return Promise.all(imageItems);
 };
 
 function * workerAllProducts () {
   const data = yield call(fetchAllProducts);
-  const cart = yield select(cartId);
-  const responceItems = data.map(async (product) => {
-    const img = await fetchImage(product.avatar);
-    const cartCheck = product.cart.find(c => c.id === cart);
-    const beInCart = !!cartCheck;
-    return {
-      ...product,
-      avatar: img.url,
-      beInCart
-    };
+  const usId = yield select(userId);
+  const carts = usId ? yield call(fetchProductsFromCart) : undefined;
+  const products = data.map(product => {
+    const cartInfo = usId ? carts.find(cart => cart.productId === product.id) : undefined;
+    checkProduct(product, usId, cartInfo);
+    return product;
   });
-  const productItems = yield call(getAllProducts, responceItems);
-  yield put(setProducts(productItems));
+  yield put(addAllProducts(products));
+  if (!usId) {
+    yield put(userHasChanged());
+  }
 }
 
-function * workerAddProductToCart () {
-  const idProduct = yield select(idAdd);
-  yield call(sendProductToCart, idProduct);
-  yield put(addToCart());
+const createProduct = (data) => {
+  const url = `${mainUrl}products`;
+  const token = localStorage.token;
+  const formData = new FormData();
+  formData.append("avatar", data.imgFile);
+  formData.append("title", data.valueTitle);
+  formData.append("description", data.valueDescription);
+  formData.append("count", data.count);
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    body: formData
+  }).then(res => res.json());
+};
+
+function * workerCreateProduct () {
+  const usId = yield select(userId);
+  const data = yield select(valueForm);
+  const newProduct = yield call(createProduct, data);
+  checkProduct(newProduct, usId);
+  yield put(addProduct(newProduct));
 }
 
-function * workerRemoveProductFromCart () {
-  const idProduct = yield select(idRemove);
-  yield call(removeProductToCart, idProduct);
-  yield put(removeFromCart());
+const updateProduct = (data, id) => {
+  const url = `${mainUrl}products/${id}`;
+  const token = localStorage.token;
+  const formData = new FormData();
+  formData.append("avatar", data.imgFile);
+  formData.append("title", data.valueTitle);
+  formData.append("description", data.valueDescription);
+  formData.append("count", data.count);
+  return fetch(url, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    body: formData
+  }).then(res => res.json());
+};
+
+function * workerUpdateProduct () {
+  const usId = yield select(userId);
+  const idProduct = yield select(productIdToChange);
+  const data = yield select(valueForm);
+  const upProduct = yield call(updateProduct, data, idProduct);
+  checkProduct(upProduct, usId);
+  yield put(editProduct(upProduct));
 }
 
-function * workerProductsFromUsersCart () {
-  const data = yield call(fetchProductsFromUsersCart);
-  const responceItems = data.map(async (product) => {
-    const img = await fetchImage(product.avatar);
-    return {
-      ...product,
-      avatar: img.url,
-      beInCart: true
-    };
-  });
-  const productItems = yield call(getAllProducts, responceItems);
-  yield put(setProductsFromCart(productItems));
-}
-
-export function * watchLoadAllProducts () {
+export function * watchLoadProducts () {
   yield takeEvery("LOAD_ALL_PRODUCTS", workerAllProducts);
-  yield takeEvery("LOAD_ADD_PRODUCT_TO_CART", workerAddProductToCart);
-  yield takeEvery("LOAD_REMOVE_PRODUCT_TO_CART", workerRemoveProductFromCart);
-  yield takeEvery("LOAD_PRODUCTS_FROM_CART", workerProductsFromUsersCart);
+  yield takeEvery("LOAD_CREATE_PRODUCT", workerCreateProduct);
+  yield takeEvery("LOAD_EDIT_PRODUCT", workerUpdateProduct);
 }

@@ -1,7 +1,6 @@
 export const initialState = {
-  id: "",
+  userId: null,
   userName: "",
-  cartId: "",
   auth: false,
   error: false
 };
@@ -12,9 +11,8 @@ const authenticated = (state = initialState, action) => {
       return {
         ...state,
         userName: action.payload.username,
-        id: action.payload.id,
-        auth: true,
-        cartId: action.payload.cartId
+        userId: action.payload.id,
+        auth: true
       };
 
     case "SET_ERROR":
@@ -32,8 +30,7 @@ const authenticated = (state = initialState, action) => {
     case "OUT_LOGIN":
       return {
         ...state,
-        id: "",
-        cartId: "",
+        userId: null,
         userName: "",
         auth: false,
         error: false

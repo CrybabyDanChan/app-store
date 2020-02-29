@@ -3,40 +3,40 @@ import createSagaMiddleware from "redux-saga";
 import { watchLoadLogInData } from "./sagas/logInSaga";
 import { watchLoadSignInData } from "./sagas/sigInSaga";
 import { watchLoadAuthData } from "./sagas/autheticatedSaga";
-import { watchLoadCreateProduct } from "./sagas/createProductsSaga";
-import { watchLoadAllProducts } from "./sagas/productsSaga";
+import { watchLoadProducts } from "./sagas/productsSaga";
+import { watchLoadCart } from "./sagas/cartSaga";
 
 import signIn from "./reducers/signIn";
 import logIn from "./reducers/logIn";
 import authenticated from "./reducers/authenticated";
 import products from "./reducers/products";
-import createProducts from "./reducers/createProducts";
+import cart from "./reducers/cart";
 
 const reducer = combineReducers({
   signIn,
   logIn,
   authenticated,
   products,
-  createProducts
+  cart
 });
 
 const logInSagaMiddelware = createSagaMiddleware();
 const signInSagaMiddelware = createSagaMiddleware();
 const authSagaMiddelware = createSagaMiddleware();
-const createProductsSagaMiddelware = createSagaMiddleware();
 const allProductsSagaMiddelware = createSagaMiddleware();
+const cartSagaMiddelware = createSagaMiddleware();
 
 const store = createStore(reducer, applyMiddleware(
   logInSagaMiddelware,
   signInSagaMiddelware,
   authSagaMiddelware,
-  createProductsSagaMiddelware,
-  allProductsSagaMiddelware
+  allProductsSagaMiddelware,
+  cartSagaMiddelware
 ));
 logInSagaMiddelware.run(watchLoadLogInData);
 signInSagaMiddelware.run(watchLoadSignInData);
 authSagaMiddelware.run(watchLoadAuthData);
-createProductsSagaMiddelware.run(watchLoadCreateProduct);
-allProductsSagaMiddelware.run(watchLoadAllProducts);
+allProductsSagaMiddelware.run(watchLoadProducts);
+cartSagaMiddelware.run(watchLoadCart);
 
 export default store;

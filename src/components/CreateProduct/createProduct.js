@@ -5,11 +5,11 @@ import PropTypes from "prop-types";
 import "./createProduct.sass";
 import Button from "../Button";
 import Counter from "../Counter";
-import * as createProductsActions from "../../actions/createProductsActions";
+import * as productsActions from "../../actions/productsActions";
 import InputImage from "../InputImage";
 
 const CreateProduct = (props) => {
-  const { loadCreateProduct, id } = props;
+  const { loadCreateProduct, id, loadEditProduct } = props;
   const [{ urlImg, valueTitle, valueDescription, imgFile }, setForm] = useState({
     urlImg: null,
     imgFile: null,
@@ -38,25 +38,40 @@ const CreateProduct = (props) => {
     });
   };
 
-  const handleSubmit = () => {
-    if (!imgFile || valueTitle === "" || valueDescription === "") {
-      return;
-    }
-    const valueForm = {
+  const getValueForm = () => {
+    return {
       valueTitle,
       valueDescription,
       imgFile,
       count
     };
-    loadCreateProduct(valueForm);
+  };
+
+  const resetState = () => {
     setForm({
       urlImg: null,
       imgFile: null,
       valueTitle: "",
       valueDescription: ""
     });
+  };
+
+  const handleSubmitForCreate = () => {
+    if (!imgFile || valueTitle === "" || valueDescription === "") {
+      return;
+    }
+    loadCreateProduct(getValueForm());
+    resetState();
     setCount(1);
   };
+
+  const handleSubmitForEdit = () => {
+    loadEditProduct(getValueForm());
+    resetState();
+    setCount(1);
+  };
+
+  const generateSubmit = id ? handleSubmitForEdit : handleSubmitForCreate;
 
   return (
     <div className="create-products">
@@ -89,7 +104,7 @@ const CreateProduct = (props) => {
                   <Counter method={setCount} count={count}/>
                 </label>
                 <div className="create-products-wrapper__btn-wrapper">
-                  <Button text="add" method={handleSubmit}/>
+                  <Button text={id ? "save" : "add"} method={generateSubmit}/>
                   <Button text="cancel" additionalClass="btn_cancel"/>
                 </div>
               </div>
@@ -104,11 +119,12 @@ const CreateProduct = (props) => {
 
 CreateProduct.propTypes = {
   loadCreateProduct: PropTypes.func,
-  id: PropTypes.any
+  id: PropTypes.any,
+  loadEditProduct: PropTypes.func
 };
 
 CreateProduct.defaultProps = {
   id: null
 };
 
-export default connect(undefined, createProductsActions)(CreateProduct);
+export default connect(undefined, productsActions)(CreateProduct);
