@@ -13,9 +13,10 @@ import Cart from "../Cart/cart";
 import CreateProduct from "../CreateProduct";
 import * as authenticatedActions from "../../actions/authenticatedActions";
 import * as productsActions from "../../actions/productsActions";
+import * as cartActions from "../../actions/cartActions";
 
 function App (props) {
-  const { logAuth, loadAllProducts, checkProducts, userId } = props;
+  const { logAuth, loadAllProducts, checkProducts, userId, loadProductsFromCart } = props;
 
   useEffect(() => {
     logAuth();
@@ -25,7 +26,10 @@ function App (props) {
     if (!checkProducts) {
       loadAllProducts();
     }
-  }, [userId]);
+    if (userId && checkProducts) {
+      loadProductsFromCart();
+    }
+  }, [userId, checkProducts]);
 
   return (
     <Fragment>
@@ -71,7 +75,8 @@ App.propTypes = {
   logAuth: PropTypes.func,
   loadAllProducts: PropTypes.func,
   checkProducts: PropTypes.bool,
-  userId: PropTypes.any
+  userId: PropTypes.any,
+  loadProductsFromCart: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -84,9 +89,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   const { logAuth } = bindActionCreators(authenticatedActions, dispatch);
   const { loadAllProducts } = bindActionCreators(productsActions, dispatch);
+  const { loadProductsFromCart } = bindActionCreators(cartActions, dispatch);
   return {
     logAuth,
-    loadAllProducts
+    loadAllProducts,
+    loadProductsFromCart
   };
 };
 

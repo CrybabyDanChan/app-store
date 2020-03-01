@@ -1,21 +1,13 @@
 import { takeEvery, call, put, select } from "redux-saga/effects";
 
 import { addAllProducts, addProduct, editProduct } from "../actions/productsActions";
-import { userHasChanged } from "../actions/authenticatedActions";
 import { mainUrl } from "../utils/url";
 import { valueForm, userId, productIdToChange } from "./selectors";
 
-const checkProduct = (product, userId, cartInfo) => {
-  product.numberInOrder = 1;
-  product.beInCart = false;
-  product.avatar = `${mainUrl}image?file=${product.avatar}`;
+const checkProduct = (product, userId) => {
   product.ownedByUser = false;
   if (product.userId === userId) {
     product.ownedByUser = true;
-  }
-  if (cartInfo) {
-    product.numberInOrder = cartInfo.numberOfProduct;
-    product.beInCart = true;
   }
 };
 
@@ -29,29 +21,14 @@ const fetchAllProducts = () => {
   }).then(res => res.json());
 };
 
-const fetchProductsFromCart = () => {
-  const url = `${mainUrl}cart`;
-  const token = localStorage.token;
-  return fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }).then(res => res.json());
-};
-
 function * workerAllProducts () {
   const data = yield call(fetchAllProducts);
   const usId = yield select(userId);
-  const carts = usId ? yield call(fetchProductsFromCart) : undefined;
   const products = data.map(product => {
-    const cartInfo = usId ? carts.find(cart => cart.productId === product.id) : undefined;
-    checkProduct(product, usId, cartInfo);
+    checkProduct(product, usId);
     return product;
   });
   yield put(addAllProducts(products));
-  if (!usId) {
-    yield put(userHasChanged());
-  }
 }
 
 const createProduct = (data) => {

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 
 import "./item.sass";
-import * as cartActions from "../../actions/cartAction";
+import * as cartActions from "../../actions/cartActions";
 import Button from "../Button";
 import Counter from "../Counter";
+import { mainUrl } from "../../utils/url";
 
 const Item = (props) => {
   const {
@@ -16,13 +16,28 @@ const Item = (props) => {
     avatar,
     description,
     ownedByUser,
-    loadAddToCart,
-    beInCart,
+    loadAddCart,
+    loadRemoveCart,
+    loadUpdateCart,
+    cartId,
     numberInOrder,
     userId
   } = props;
 
   const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    if (numberInOrder) {
+      setCount(numberInOrder);
+    }
+  }, []);
+
+  const updateCounterInCart = (number) => {
+    loadUpdateCart({ count: number, cartId });
+    setCount(number);
+  };
+
+  const handleCounter = cartId ? updateCounterInCart : setCount;
 
   const generateBtn = (ownedByUser)
     ? <Link to={`/edit-products/${id}`}
@@ -30,20 +45,20 @@ const Item = (props) => {
       <Button type = "editProduct"
         text="edit product"/>
     </Link>
-    : (beInCart)
+    : (cartId)
       ? <Button type = "deleting"
         text="delete"
-        method={() => loadAddToCart({ id, count })}/>
+        method={() => loadRemoveCart({ cartId, count, id })}/>
       : <Button disabled={!userId}
         type = {userId ? "addToCart" : "disabled"}
         text="add to cart"
-        method={() => loadAddToCart({ id, count })}/>;
+        method={() => loadAddCart({ id, count })}/>;
 
   return (
     <div className="item">
       <div className="container">
         <div className="item-wrapper">
-          <img src={avatar} alt="" className="item-wrapper__img"/>
+          <img src={`${mainUrl}image?file=${avatar}`} alt="" className="item-wrapper__img"/>
           <div className="item-wrapper__description">
             <div className="item-wrapper__title">{name}</div>
             <div className="item-wrapper__text">{description}</div>
@@ -51,7 +66,7 @@ const Item = (props) => {
           <div className="item-wrapper__counter">
             {
               !ownedByUser && userId
-                ? <Counter method={setCount} count={beInCart ? numberInOrder : count}/>
+                ? <Counter method={handleCounter} count={count}/>
                 : null
             }
           </div>
@@ -68,10 +83,11 @@ Item.propTypes = {
   avatar: PropTypes.string,
   description: PropTypes.string,
   ownedByUser: PropTypes.bool,
-  loadAddToCart: PropTypes.func,
-  beInCart: PropTypes.bool,
+  loadAddCart: PropTypes.func,
+  cartId: PropTypes.any,
   numberInOrder: PropTypes.any,
-  userId: PropTypes.any
+  userId: PropTypes.any,
+  loadRemoveCart: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
@@ -80,11 +96,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  const { loadAddToCart } = bindActionCreators(cartActions, dispatch);
-  return {
-    loadAddToCart
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Item);
+export default connect(mapStateToProps, cartActions)(Item);

@@ -32,10 +32,38 @@ const loadEditProduct = (productId, valueForm) => {
   };
 };
 
-const editProduct = (updateProduct) => {
+const editProduct = (product) => {
   return {
     type: "EDIT_PRODUCT",
-    payload: updateProduct
+    payload: product
+  };
+};
+
+const addProductsToCart = (products) => {
+  return {
+    type: "ADD_PRODUCTS_TO_CART",
+    payload: products
+  };
+};
+
+const addProductToCart = (product) => {
+  return {
+    type: "ADD_PRODUCT_TO_CART",
+    payload: product
+  };
+};
+
+const updateProductFromCart = (product) => {
+  return {
+    type: "UPDATE_PRODUCT_FROM_CART",
+    payload: product
+  };
+};
+
+const removeProductFromCart = (product) => {
+  return {
+    type: "REMOVE_PPRODUCT_FROM_CART",
+    payload: product
   };
 };
 
@@ -45,5 +73,9 @@ export {
   loadCreateProduct,
   addProduct,
   loadEditProduct,
-  editProduct
+  editProduct,
+  addProductToCart,
+  removeProductFromCart,
+  addProductsToCart,
+  updateProductFromCart
 };

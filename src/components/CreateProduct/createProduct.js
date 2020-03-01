@@ -66,7 +66,7 @@ const CreateProduct = (props) => {
   };
 
   const handleSubmitForEdit = () => {
-    loadEditProduct(getValueForm());
+    loadEditProduct(id, getValueForm());
     resetState();
     setCount(1);
   };

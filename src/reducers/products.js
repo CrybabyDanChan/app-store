@@ -18,12 +18,10 @@ const products = (state = initialState, action) => {
     case "ADD_ALL_PRODUCTS":
       const newProducts = action.payload;
       const myProducts = newProducts.filter(product => product.ownedByUser);
-      const productsToCart = newProducts.filter(product => product.beInCart);
       return {
         ...state,
         arrayOfAllProducts: newProducts,
         arrayOfMyProducts: myProducts,
-        arrayOfCart: productsToCart,
         checkProducts: true
       };
 
@@ -67,6 +65,68 @@ const products = (state = initialState, action) => {
         arrayOfMyProducts: newMyProducts,
         productIdToChange: null,
         valueForm: null
+      };
+
+    case "ADD_PRODUCTS_TO_CART":
+      let newAllProd = state.arrayOfAllProducts.concat();
+      const newCartProd = action.payload;
+      newAllProd = newAllProd.map(product => {
+        const newProduct = newCartProd.find(p => p.id === product.id);
+        if (newProduct) {
+          return newProduct;
+        }
+        return product;
+      });
+      return {
+        ...state,
+        arrayOfAllProducts: newAllProd,
+        arrayOfCart: newCartProd
+      };
+
+    case "ADD_PRODUCT_TO_CART":
+      const productFromCart = action.payload;
+      let newAllProdAdd = state.arrayOfAllProducts.concat();
+      const newCartProdAdd = state.arrayOfCart.concat();
+      newCartProdAdd.push(productFromCart);
+      newAllProdAdd = newAllProdAdd.map(p => {
+        if (p.id === productFromCart.id) {
+          return productFromCart;
+        }
+        return p;
+      });
+      console.log(newAllProdAdd);
+      return {
+        ...state,
+        arrayOfAllProducts: newAllProdAdd,
+        arrayOfCart: newCartProdAdd
+      };
+
+    case "UPDATE_PRODUCT_FROM_CART":
+      const updateProductFromCart = action.payload;
+      const arrayOfProductsForUpdate = state.arrayOfAllProducts.concat();
+      const arrayOfCartsForUpdate = state.arrayOfCart.concat();
+      const indexUpdateProductInAll = arrayOfProductsForUpdate.findIndex(p => p.id === updateProductFromCart.id);
+      const indexUpdateProductInCart = arrayOfCartsForUpdate.findIndex(p => p.id === updateProductFromCart.id);
+      arrayOfProductsForUpdate[indexUpdateProductInAll] = updateProductFromCart;
+      arrayOfCartsForUpdate[indexUpdateProductInCart] = updateProductFromCart;
+      return {
+        ...state,
+        arrayOfAllProducts: arrayOfProductsForUpdate,
+        arrayOfCart: arrayOfCartsForUpdate
+      };
+
+    case "REMOVE_PPRODUCT_FROM_CART":
+      const productRemoveFromCart = action.payload;
+      const newProdAllArray = state.arrayOfAllProducts.concat();
+      let newCartArray = state.arrayOfCart.concat();
+      newCartArray = newCartArray.filter(p => p.id !== productRemoveFromCart.id);
+      const indexProductInAll = newProdAllArray.findIndex(prod => prod.id === productRemoveFromCart.id);
+      newProdAllArray[indexProductInAll] = productRemoveFromCart;
+      console.log(newProdAllArray);
+      return {
+        ...state,
+        arrayOfCart: newCartArray,
+        arrayOfAllProducts: newProdAllArray
       };
 
     case "USER_HAS_CHANGED":

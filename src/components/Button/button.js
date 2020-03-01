@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 import "./button.sass";
-
 import whiteCart from "../../images/whiteCart.png";
 import blueCart from "../../images/blueCart.png";
 import create from "../../images/create.png";
@@ -25,22 +25,11 @@ const Button = (props) => {
     return additionalClass ? `${nameClass} ${additionalClass}` : `${nameClass}`;
   };
 
-  const generateClass = () => {
-    switch (type) {
-      case "addToCart" :
-        return handleClass("btn btn_img-flex");
-      case "addProduct" :
-        return handleClass("btn btn_img-flex");
-      case "deleting" :
-        return handleClass("btn btn_img-flex btn_cancel");
-      case "editProduct" :
-        return handleClass("btn btn_img-flex");
-      case "disabled" :
-        return handleClass("btn__disabled btn_center");
-      default:
-        return handleClass("btn");
-    }
-  };
+  const generateClass = classNames("btn", {
+    "btn btn_img-flex": type === "addProduct" || "editProduct" || "addToCart",
+    "btn btn_img-flex btn_cancel": type === "deleting",
+    "btn__disabled btn_center": type === "disabled"
+  });
 
   const generateImg = () => {
     switch (type) {
@@ -63,7 +52,7 @@ const Button = (props) => {
     <button
       disabled = {disabled}
       type="button"
-      className={generateClass()}
+      className={handleClass(generateClass)}
       onClick={generateMethod}>
       {generateImg()}
       {text}

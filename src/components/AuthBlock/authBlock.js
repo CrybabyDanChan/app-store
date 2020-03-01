@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 import "./authBlock.sass";
 
@@ -24,7 +25,7 @@ const authBlock = ({ type }) => {
     </NavLink>
     <NavLink to="/products/my" className="auth-block__link auth-block__link_indent"
       activeClassName="auth-block__is-active_products">
-    My Products
+      My Products
     </NavLink>
   </Fragment>;
 
@@ -39,26 +40,16 @@ const authBlock = ({ type }) => {
     }
   };
 
-  const generateClass = () => {
-    switch (type) {
-      case "products":
-        return "auth-block_default";
-      case "logotype":
-        return "auth-block";
-      default:
-        return null;
-    }
-  };
+  const generateClass = classNames({
+    "auth-block_default": type === "products",
+    "auth-block": type === "logotype"
+  });
 
   return (
-    <div className={generateClass()}>
+    <div className={generateClass}>
       {generateBlock()}
     </div>
   );
-};
-
-authBlock.defaultProps = {
-  type: ""
 };
 
 authBlock.propTypes = {
