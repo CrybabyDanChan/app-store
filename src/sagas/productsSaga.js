@@ -21,16 +21,6 @@ const fetchAllProducts = () => {
   }).then(res => res.json());
 };
 
-function * workerAllProducts () {
-  const data = yield call(fetchAllProducts);
-  const usId = yield select(userId);
-  const products = data.map(product => {
-    checkProduct(product, usId);
-    return product;
-  });
-  yield put(addAllProducts(products));
-}
-
 const createProduct = (data) => {
   const url = `${mainUrl}products`;
   const token = localStorage.token;
@@ -47,14 +37,6 @@ const createProduct = (data) => {
     body: formData
   }).then(res => res.json());
 };
-
-function * workerCreateProduct () {
-  const usId = yield select(userId);
-  const data = yield select(valueForm);
-  const newProduct = yield call(createProduct, data);
-  checkProduct(newProduct, usId);
-  yield put(addProduct(newProduct));
-}
 
 const updateProduct = (data, id) => {
   const url = `${mainUrl}products/${id}`;
@@ -73,6 +55,14 @@ const updateProduct = (data, id) => {
   }).then(res => res.json());
 };
 
+function * workerCreateProduct () {
+  const usId = yield select(userId);
+  const data = yield select(valueForm);
+  const newProduct = yield call(createProduct, data);
+  checkProduct(newProduct, usId);
+  yield put(addProduct(newProduct));
+}
+
 function * workerUpdateProduct () {
   const usId = yield select(userId);
   const idProduct = yield select(productIdToChange);
@@ -80,6 +70,16 @@ function * workerUpdateProduct () {
   const upProduct = yield call(updateProduct, data, idProduct);
   checkProduct(upProduct, usId);
   yield put(editProduct(upProduct));
+}
+
+function * workerAllProducts () {
+  const data = yield call(fetchAllProducts);
+  const usId = yield select(userId);
+  const products = data.map(product => {
+    checkProduct(product, usId);
+    return product;
+  });
+  yield put(addAllProducts(products));
 }
 
 export function * watchLoadProducts () {

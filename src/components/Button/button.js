@@ -12,7 +12,7 @@ const Button = (props) => {
   const {
     type,
     text,
-    method,
+    actionMethod,
     disabled,
     additionalClass
   } = props;
@@ -25,8 +25,11 @@ const Button = (props) => {
     return additionalClass ? `${nameClass} ${additionalClass}` : `${nameClass}`;
   };
 
-  const generateClass = classNames("btn", {
-    "btn btn_img-flex": type === "addProduct" || "editProduct" || "addToCart",
+  const generateClass = classNames({
+    btn: !type,
+    "btn btn_img-flex": type === "addProduct" ||
+    type === "editProduct" ||
+    type === "addToCart",
     "btn btn_img-flex btn_cancel": type === "deleting",
     "btn__disabled btn_center": type === "disabled"
   });
@@ -46,7 +49,7 @@ const Button = (props) => {
     }
   };
 
-  const generateMethod = !method ? () => {} : method;
+  const generateMethod = !actionMethod ? () => {} : actionMethod;
 
   return (
     <button
@@ -60,15 +63,16 @@ const Button = (props) => {
   );
 };
 Button.deffaultProps = {
+  type: null,
   additionalClass: "",
-  method: null,
+  actionMethod: null,
   disabled: false
 };
 
 Button.propTypes = {
   text: PropTypes.string,
   type: PropTypes.string,
-  method: PropTypes.func,
+  actionMethod: PropTypes.func,
   disabled: PropTypes.bool,
   additionalClass: PropTypes.string
 };

@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import "./signIn.sass";
 import * as signInActions from "../../actions/signInActions";
 import Button from "../Button";
-import { regExForLogin, regExForPassword } from "../../utils/regularExpresion";
+import { valPass, valLogin } from "../../utils/regularExpresion";
 
 const SignIn = (props) => {
   const {
@@ -33,15 +33,11 @@ const SignIn = (props) => {
   });
 
   const validateLogin = (value) => {
-    const regEx = regExForLogin;
-    const checkLogin = regEx.test(value);
-    return checkLogin;
+    return valLogin(value);
   };
 
   const validatePassword = (value) => {
-    const regEx = regExForPassword;
-    const checkPassword = regEx.test(value);
-    return checkPassword;
+    return valPass(value);
   };
 
   const generateInputClass = (errorTypes, key) => {
@@ -121,7 +117,7 @@ const SignIn = (props) => {
             type = {generateBtn ? "disabled" : null}
             additionalClass="btn_center"
             disabled={generateBtn}
-            method={registrationOfUsers}
+            actionMethod={registrationOfUsers}
           />
         </div>
       </div>
@@ -144,5 +140,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, signInActions),
-  withRouter,
+  withRouter
 )(SignIn);

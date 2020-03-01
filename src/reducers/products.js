@@ -94,7 +94,6 @@ const products = (state = initialState, action) => {
         }
         return p;
       });
-      console.log(newAllProdAdd);
       return {
         ...state,
         arrayOfAllProducts: newAllProdAdd,
@@ -122,7 +121,6 @@ const products = (state = initialState, action) => {
       newCartArray = newCartArray.filter(p => p.id !== productRemoveFromCart.id);
       const indexProductInAll = newProdAllArray.findIndex(prod => prod.id === productRemoveFromCart.id);
       newProdAllArray[indexProductInAll] = productRemoveFromCart;
-      console.log(newProdAllArray);
       return {
         ...state,
         arrayOfCart: newCartArray,

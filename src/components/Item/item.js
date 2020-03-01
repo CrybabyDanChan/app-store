@@ -48,11 +48,11 @@ const Item = (props) => {
     : (cartId)
       ? <Button type = "deleting"
         text="delete"
-        method={() => loadRemoveCart({ cartId, count, id })}/>
+        actionMethod={() => loadRemoveCart({ cartId, count, id })}/>
       : <Button disabled={!userId}
         type = {userId ? "addToCart" : "disabled"}
         text="add to cart"
-        method={() => loadAddCart({ id, count })}/>;
+        actionMethod={() => loadAddCart({ id, count })}/>;
 
   return (
     <div className="item">
@@ -66,7 +66,7 @@ const Item = (props) => {
           <div className="item-wrapper__counter">
             {
               !ownedByUser && userId
-                ? <Counter method={handleCounter} count={count}/>
+                ? <Counter actionMethod={handleCounter} count={count}/>
                 : null
             }
           </div>
@@ -87,7 +87,8 @@ Item.propTypes = {
   cartId: PropTypes.any,
   numberInOrder: PropTypes.any,
   userId: PropTypes.any,
-  loadRemoveCart: PropTypes.func
+  loadRemoveCart: PropTypes.func,
+  loadUpdateCart: PropTypes.func
 };
 
 const mapStateToProps = (state) => {

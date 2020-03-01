@@ -17,6 +17,7 @@ const fetchProductsFromCart = () => {
 };
 
 const addCart = (data) => {
+  const bodyForCart = JSON.stringify(data);
   const url = `${mainUrl}cart`;
   const token = localStorage.token;
   return fetch(url, {
@@ -25,12 +26,14 @@ const addCart = (data) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify(data)
+    body: bodyForCart
   }).then(res => res.json());
 };
 
 const updateCart = (data) => {
-  const url = `${mainUrl}cart/${data.cartId}`;
+  const bodyForCart = JSON.stringify({ count: data.count });
+  const cartId = data.cartId;
+  const url = `${mainUrl}cart/${cartId}`;
   const token = localStorage.token;
   return fetch(url, {
     method: "PUT",
@@ -38,12 +41,13 @@ const updateCart = (data) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
     },
-    body: JSON.stringify({ count: data.count })
+    body: bodyForCart
   }).then(res => res.json());
 };
 
 const removeCart = (data) => {
-  const url = `${mainUrl}cart/${data.cartId}`;
+  const cartId = data.cartId;
+  const url = `${mainUrl}cart/${cartId}`;
   const token = localStorage.token;
   return fetch(url, {
     method: "DELETE",

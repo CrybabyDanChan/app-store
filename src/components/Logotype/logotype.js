@@ -26,10 +26,10 @@ const Logotype = ({ auth, outLog, history, userHasChanged }) => {
     setOut(false);
   };
 
-  const viewOut = out ? <OutBlock method={outLogin}/> : null;
+  const viewOut = out ? <OutBlock actionMethod={outLogin}/> : null;
 
   const viewBlock = auth
-    ? <UserBlock method={() => setOut(state => !state)}/>
+    ? <UserBlock actionMethod={() => setOut(state => !state)}/>
     : <AuthBlock type="logotype"/>;
 
   return (

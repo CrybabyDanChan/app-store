@@ -1,19 +1,21 @@
 import { takeEvery, call, select, put } from "redux-saga/effects";
+
 import { signIn } from "./selectors";
 import { setTokenAndUser, setErrorAuth, userHasChanged } from "../actions/authenticatedActions";
+import { mainUrl } from "../utils/url";
 
 const fetchData = (userData) => {
-  const url = "http://localhost:3000/users/register";
-  const user = {
+  const url = `${mainUrl}users/register`;
+  const user = JSON.stringify({
     name: userData.login,
     password: userData.password
-  };
+  });
   return fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(user)
+    body: user
   }).then(res => res.json());
 };
 

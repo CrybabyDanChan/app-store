@@ -4,20 +4,20 @@ import PropTypes from "prop-types";
 import "./counter.sass";
 
 const Counter = (props) => {
-  const { method, count } = props;
+  const { actionMethod, count } = props;
 
   const handleIncClick = () => {
-    method(count + 1);
+    actionMethod(count + 1);
   };
 
   const handleDecClick = () => {
     if (count >= 2) {
-      method(count - 1);
+      actionMethod(count - 1);
     }
   };
 
   const handleInput = (event) => {
-    method(event.target.value);
+    actionMethod(event.target.value);
   };
 
   return (
@@ -37,7 +37,7 @@ const Counter = (props) => {
 };
 
 Counter.propTypes = {
-  method: PropTypes.func,
+  actionMethod: PropTypes.func,
   count: PropTypes.number
 };
 

@@ -7,11 +7,11 @@ import cart from "../../images/cart.jpg";
 import "./userBlock.sass";
 
 const UserBlock = (props) => {
-  const { method } = props;
+  const { actionMethod } = props;
   return (
     <div className="user-block">
       <div className="user-block__personal"
-        onClick={method}>
+        onClick={actionMethod}>
         <img src={personal} alt="personal" className="user-block__img"/>
       </div>
       <Link to="/cart" className="user-block__cart">
@@ -22,7 +22,7 @@ const UserBlock = (props) => {
 };
 
 UserBlock.propTypes = {
-  method: PropTypes.func
+  actionMethod: PropTypes.func
 };
 
 export default UserBlock;

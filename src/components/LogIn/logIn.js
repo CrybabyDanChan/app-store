@@ -8,7 +8,7 @@ import compose from "../../compose";
 import "./logIn.sass";
 import * as actionsLogIn from "../../actions/logInActions";
 import Button from "../Button";
-import { regExForLogin, regExForPassword } from "../../utils/regularExpresion";
+import { valPass, valLogin } from "../../utils/regularExpresion";
 
 const LogIn = (props) => {
   const {
@@ -33,15 +33,11 @@ const LogIn = (props) => {
   });
 
   const validateLogin = (value) => {
-    const regEx = regExForLogin;
-    const checkLogin = regEx.test(value);
-    return checkLogin;
+    return valLogin(value);
   };
 
   const validatePassword = (value) => {
-    const regEx = regExForPassword;
-    const checkPassword = regEx.test(value);
-    return checkPassword;
+    return valPass(value);
   };
 
   const generateInputClass = (errorTypes, value) => {
@@ -108,7 +104,7 @@ const LogIn = (props) => {
               onChange={handleChangePassword}
               value = {passwordValue}/>
           </label>
-          <Button text="log in" additionalClass="btn_center" method={enterUser}/>
+          <Button text="log in" additionalClass="btn_center" actionMethod={enterUser}/>
         </div>
       </div>
     </div>

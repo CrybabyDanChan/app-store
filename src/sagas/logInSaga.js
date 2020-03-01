@@ -1,22 +1,22 @@
 import { takeEvery, call, put, select } from "redux-saga/effects";
+
 import { setTokenAndUser, setErrorAuth, userHasChanged } from "../actions/authenticatedActions";
 import { logIn } from "./selectors";
+import { mainUrl } from "../utils/url";
 
 const fetchData = (userData) => {
-  const url = "http://localhost:3000/auth/login";
-  const user = {
+  const url = `${mainUrl}auth/login`;
+  const user = JSON.stringify({
     username: userData.login,
     password: userData.password
-  };
+  });
   return fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(user)
-  }).then((data) => {
-    return data.json();
-  });
+    body: user
+  }).then(res => res.json());
 };
 
 function * workerLoadData () {

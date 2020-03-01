@@ -9,7 +9,7 @@ import Button from "../Button";
 const Cart = ({ arrayOfCart }) => {
   const placeOrder = arrayOfCart.length
     ? <div className="cart-wrapper__place-order">
-      <Button text="clear" method = {() => {}} additionalClass="btn_cancel"/>
+      <Button text="clear" actionMethod = {() => {}} additionalClass="btn_cancel"/>
       <Button text="order"/>
     </div>
     : null;

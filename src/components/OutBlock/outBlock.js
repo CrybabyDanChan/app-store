@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 import "./outBlock.sass";
 
 const OutBlock = (props) => {
-  const { method } = props;
+  const { actionMethod } = props;
   return (
-    <div className="out-block" onClick={method}>
+    <div className="out-block" onClick={actionMethod}>
       <div className="out-block__wrapper">
         <span></span>
         Log Out
@@ -16,7 +16,7 @@ const OutBlock = (props) => {
 };
 
 OutBlock.propTypes = {
-  method: PropTypes.func
+  actionMethod: PropTypes.func
 };
 
 export default OutBlock;

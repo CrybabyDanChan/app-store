@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import "./welcomeToUser.sass";
 import Button from "../Button";
+import PropTypes from "prop-types";
 
 const WelcomeToUser = (props) => {
   const { userName } = props;
@@ -25,6 +26,10 @@ const WelcomeToUser = (props) => {
 
 const mapStateToProps = (state) => {
   return state.authenticated;
+};
+
+WelcomeToUser.propTypes = {
+  userName: PropTypes.string
 };
 
 export default connect(mapStateToProps)(WelcomeToUser);

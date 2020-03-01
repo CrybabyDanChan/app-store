@@ -6,7 +6,7 @@ import download from "../../images/download.png";
 import defaultImg from "../../images/defaultImg.png";
 
 const InputImage = (props) => {
-  const { method, urlImg } = props;
+  const { actionMethod, urlImg } = props;
   const refImg = useRef();
   const dropPlace = useRef();
 
@@ -16,7 +16,7 @@ const InputImage = (props) => {
     const img = event.dataTransfer.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-      method(state => {
+      actionMethod(state => {
         return {
           ...state,
           urlImg: e.target.result,
@@ -38,7 +38,7 @@ const InputImage = (props) => {
     const reader = new FileReader();
     const imgFileItem = refImg.current.files[0];
     reader.onload = (e) => {
-      method(state => {
+      actionMethod(state => {
         return {
           ...state,
           urlImg: e.target.result,
@@ -88,7 +88,7 @@ const InputImage = (props) => {
 };
 
 InputImage.propTypes = {
-  method: Proptypes.func,
+  actionMethod: Proptypes.func,
   urlImg: Proptypes.string
 };
 

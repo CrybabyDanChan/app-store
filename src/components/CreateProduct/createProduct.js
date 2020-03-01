@@ -101,14 +101,14 @@ const CreateProduct = (props) => {
                 </label>
                 <label className="create-products-wrapper__counter-wrapper">
                   <div className="create-products-wrapper__subtitle create-products-wrapper_indent-right">Count</div>
-                  <Counter method={setCount} count={count}/>
+                  <Counter actionMethod={setCount} count={count}/>
                 </label>
                 <div className="create-products-wrapper__btn-wrapper">
-                  <Button text={id ? "save" : "add"} method={generateSubmit}/>
+                  <Button text={id ? "save" : "add"} actionMethod={generateSubmit}/>
                   <Button text="cancel" additionalClass="btn_cancel"/>
                 </div>
               </div>
-              <InputImage method={setForm} urlImg={urlImg}/>
+              <InputImage actionMethod={setForm} urlImg={urlImg}/>
             </div>
           </div>
         </div>

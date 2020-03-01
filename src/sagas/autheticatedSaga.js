@@ -1,9 +1,11 @@
 import { takeEvery, call, put } from "redux-saga/effects";
 import { setTokenAndUser, setErrorAuth } from "../actions/authenticatedActions";
 
+import { mainUrl } from "../utils/url";
+
 const fetchData = () => {
   const token = localStorage.token;
-  const url = "http://localhost:3000/profile";
+  const url = `${mainUrl}profile`;
   return fetch(url, {
     headers: {
       "Content-Type": "application/json",
