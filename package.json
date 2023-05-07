@@ -17,7 +17,7 @@
     "react-normalize": "^0.4.4",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "3.3.1",
+    "react-scripts": "5.0.1",
     "redux": "^4.0.1",
     "redux-saga": "^1.1.3"
   },
@@ -67,14 +67,14 @@
     "faker": "^4.1.0",
     "file-loader": "^4.2.0",
     "gh-pages": "^2.2.0",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^0.8.2",
     "node-sass": "^4.13.0",
     "puppeteer": "^2.1.1",
     "sass-loader": "^8.0.1",
     "style-loader": "^1.1.2",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.5",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.10.3"
   }
 }
